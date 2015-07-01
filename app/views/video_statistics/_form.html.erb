@@ -1,0 +1,31 @@
+<%= form_for @video_statistic, :html => { :class => "form-horizontal video_statistic" } do |f| %>
+
+    <% if @video_statistic.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@video_statistic.errors.count, "error") %> prohibited this video_statistic from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @video_statistic.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :video_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :video_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@video_statistic[:video_id]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            video_statistics_path, :class => 'btn btn-default' %>
+
+<% end %>

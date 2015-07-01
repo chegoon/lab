@@ -1,0 +1,31 @@
+<%= form_for @channel_statistic, :html => { :class => "form-horizontal channel_statistic" } do |f| %>
+
+    <% if @channel_statistic.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@channel_statistic.errors.count, "error") %> prohibited this channel_statistic from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @channel_statistic.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :channel_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :channel_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@channel_statistic[:channel_id]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            channel_statistics_path, :class => 'btn btn-default' %>
+
+<% end %>

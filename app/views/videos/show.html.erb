@@ -1,0 +1,53 @@
+<%- model_class = Video -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:v_id) %>:</strong></dt>
+  <dd><%= @video.v_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
+  <dd><%= @video.title %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @video.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:published_at) %>:</strong></dt>
+  <dd><%= @video.published_at %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:thumbnail_url) %>:</strong></dt>
+  <dd><%= @video.thumbnail_url %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:channel_id) %>:</strong></dt>
+  <dd><%= @video.channel_id %></dd>
+</dl>
+
+<% if @video_stats %>
+<table class="table">
+  <tr>
+    <th>Date</th>
+    <th>View #</th>
+    <th>Like #</th>
+    <th>Dislike #</th>
+    <th>Favorite #</th>
+    <th>Comment #</th>
+  </tr>
+<%  @video_stats.each do |stat| %>
+  <tr >
+    <td><%= stat.created_at.to_date %></td>
+    <td style="text-align:right;"><%= number_with_delimiter(stat.view_count) %></td>
+    <td style="text-align:right;"><%= number_with_delimiter(stat.like_count) %></td>
+    <td style="text-align:right;"><%= number_with_delimiter(stat.dislike_count) %></td>
+    <td style="text-align:right;"><%= number_with_delimiter(stat.favorite_count) %></td>
+    <td style="text-align:right;"><%= number_with_delimiter(stat.comment_count) %></td>
+    
+  </tr>
+<%  end %>
+</table>
+<% end %>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              videos_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_video_path(@video), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              video_path(@video),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

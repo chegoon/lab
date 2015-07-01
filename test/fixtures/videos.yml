@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  v_id: MyString
+  title: MyString
+  description: MyText
+  published_at: 2015-06-29 00:16:13
+  thumbnail_url: MyString
+  channel_id: 
+
+two:
+  v_id: MyString
+  title: MyString
+  description: MyText
+  published_at: 2015-06-29 00:16:13
+  thumbnail_url: MyString
+  channel_id: 

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ch_id: MyString
+  title: MyString
+  description: MyText
+  published_at: 2015-06-28 21:30:51
+  thumbnail_url: MyString
+
+two:
+  ch_id: MyString
+  title: MyString
+  description: MyText
+  published_at: 2015-06-28 21:30:51
+  thumbnail_url: MyString

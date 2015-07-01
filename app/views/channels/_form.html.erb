@@ -1,0 +1,59 @@
+<%= form_for @channel, :html => { :class => "form-horizontal channel" } do |f| %>
+
+    <% if @channel.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@channel.errors.count, "error") %> prohibited this channel from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @channel.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :ch_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :ch_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@channel[:ch_id]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :title, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+    <%= error_span(@channel[:title]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :description, :class => 'form-control' %>
+    </div>
+    <%= error_span(@channel[:description]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :published_at, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :published_at, :class => 'form-control' %>
+    </div>
+    <%= error_span(@channel[:published_at]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :thumbnail_url, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :thumbnail_url, :class => 'form-control' %>
+    </div>
+    <%= error_span(@channel[:thumbnail_url]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            channels_path, :class => 'btn btn-default' %>
+
+<% end %>

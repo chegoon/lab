@@ -1,0 +1,2 @@
+module ChannelStatisticsHelper
+end

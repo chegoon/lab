@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Playlist:</strong>
+  <%= @playlist_item.playlist %>
+</p>
+
+<p>
+  <strong>Video:</strong>
+  <%= @playlist_item.video %>
+</p>
+
+<p>
+  <strong>It:</strong>
+  <%= @playlist_item.it_id %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @playlist_item.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @playlist_item.description %>
+</p>
+
+<p>
+  <strong>Published at:</strong>
+  <%= @playlist_item.published_at %>
+</p>
+
+<p>
+  <strong>Thumbnail url:</strong>
+  <%= @playlist_item.thumbnail_url %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @playlist_item.position %>
+</p>
+
+<%= link_to 'Edit', edit_playlist_item_path(@playlist_item) %> |
+<%= link_to 'Back', playlist_items_path %>

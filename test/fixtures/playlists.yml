@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pl_id: 1
+  title: MyString
+  description: MyText
+  thumbnail_url: MyString
+  published_at: 2015-06-28 22:43:20
+  tag: MyString
+  channel_id: 
+
+two:
+  pl_id: 1
+  title: MyString
+  description: MyText
+  thumbnail_url: MyString
+  published_at: 2015-06-28 22:43:20
+  tag: MyString
+  channel_id: 

@@ -1,0 +1,39 @@
+<h1>Listing playlist_items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Playlist</th>
+      <th>Video</th>
+      <th>It</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Published at</th>
+      <th>Thumbnail url</th>
+      <th>Position</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @playlist_items.each do |playlist_item| %>
+      <tr>
+        <td><%= playlist_item.playlist %></td>
+        <td><%= playlist_item.video %></td>
+        <td><%= playlist_item.it_id %></td>
+        <td><%= playlist_item.title %></td>
+        <td><%= playlist_item.description %></td>
+        <td><%= playlist_item.published_at %></td>
+        <td><%= playlist_item.thumbnail_url %></td>
+        <td><%= playlist_item.position %></td>
+        <td><%= link_to 'Show', playlist_item %></td>
+        <td><%= link_to 'Edit', edit_playlist_item_path(playlist_item) %></td>
+        <td><%= link_to 'Destroy', playlist_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Playlist item', new_playlist_item_path %>

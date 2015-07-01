@@ -1,0 +1,73 @@
+<%= form_for @playlist, :html => { :class => "form-horizontal playlist" } do |f| %>
+
+    <% if @playlist.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@playlist.errors.count, "error") %> prohibited this playlist from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @playlist.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :pl_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :pl_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@playlist[:pl_id]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :title, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+    <%= error_span(@playlist[:title]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :description, :class => 'form-control' %>
+    </div>
+    <%= error_span(@playlist[:description]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :thumbnail_url, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :thumbnail_url, :class => 'form-control' %>
+    </div>
+    <%= error_span(@playlist[:thumbnail_url]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :published_at, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :published_at, :class => 'form-control' %>
+    </div>
+    <%= error_span(@playlist[:published_at]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :tags, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :tags, :class => 'form-control' %>
+    </div>
+    <%= error_span(@playlist[:tags]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :channel_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :channel_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@playlist[:channel_id]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            playlists_path, :class => 'btn btn-default' %>
+
+<% end %>
