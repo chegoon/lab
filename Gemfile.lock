@@ -153,7 +153,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   less-rails
-  libv8
   mysql2
   passenger
   rails (= 4.1.6)
