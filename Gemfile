@@ -30,7 +30,7 @@ gem 'spring',        group: :development
 gem 'yt'
 #gem "therubyracer"
 #gem 'libv8'#, '3.16.14.8'
-gem 'libv8', git: 'https://github.com/cowboyd/libv8.git', submodules: true
+gem 'libv8'#, git: 'https://github.com/cowboyd/libv8.git', submodules: true
 gem 'therubyracer', git: 'https://github.com/cowboyd/therubyracer.git'
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"

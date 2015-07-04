@@ -1,11 +1,4 @@
 GIT
-  remote: https://github.com/cowboyd/libv8.git
-  revision: 9188acea19f1443c10cd7ec84ddb4b99a20b5c5b
-  submodules: true
-  specs:
-    libv8 (3.16.14.11)
-
-GIT
   remote: https://github.com/cowboyd/therubyracer.git
   revision: fd05d84f913d88e680e006dcd4bd51e5642b8589
   specs:
@@ -75,6 +68,7 @@ GEM
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
+    libv8 (3.16.14.11)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.6.1)
@@ -164,7 +158,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   less-rails
-  libv8!
+  libv8
   mysql2
   passenger
   rails (= 4.1.6)
