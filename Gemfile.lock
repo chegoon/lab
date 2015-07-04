@@ -1,3 +1,18 @@
+GIT
+  remote: https://github.com/cowboyd/libv8.git
+  revision: 9188acea19f1443c10cd7ec84ddb4b99a20b5c5b
+  submodules: true
+  specs:
+    libv8 (3.16.14.11)
+
+GIT
+  remote: https://github.com/cowboyd/therubyracer.git
+  revision: fd05d84f913d88e680e006dcd4bd51e5642b8589
+  specs:
+    therubyracer (0.12.2)
+      libv8 (~> 3.16.14.0)
+      ref
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -60,7 +75,6 @@ GEM
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
-    libv8 (3.16.14.11)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.6.1)
@@ -120,9 +134,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    therubyracer (0.12.2)
-      libv8 (~> 3.16.14.0)
-      ref
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
@@ -153,6 +164,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   less-rails
+  libv8!
   mysql2
   passenger
   rails (= 4.1.6)
@@ -160,7 +172,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   sidekiq
   spring
-  therubyracer
+  therubyracer!
   turbolinks
   twitter-bootstrap-rails
   uglifier (>= 1.3.0)
