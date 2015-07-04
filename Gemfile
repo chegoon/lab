@@ -28,8 +28,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'yt'
-gem "therubyracer"
-gem 'libv8', '3.11.8.17'
+gem 'libv8'#, '3.11.8.17'
+gem 'therubyracer'#, '0.11.0beta8'
 #gem 'libv8'
 #gem 'therubyracer'
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
