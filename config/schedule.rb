@@ -20,5 +20,5 @@ set :output, "log/cron.log"
 
 # Learn more: http://github.com/javan/whenever
 every 3.hours do
-	runner "ChannelsWorker.perform_async"
+	runner "ChannelsWorker.perform_async", environment: 'production'
 end
