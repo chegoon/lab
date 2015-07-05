@@ -7,6 +7,7 @@
 #
 # set :output, "/path/to/my/cron_log.log"
 set :output, "log/cron.log"
+set :env_path,    '"$HOME/.rbenv/shims":"$HOME/.rbenv/bin"'
 #
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
@@ -19,9 +20,11 @@ set :output, "log/cron.log"
 # end
 
 # Learn more: http://github.com/javan/whenever
-job_type :lab_runner, %Q{export PATH=/opt/rbenv/shims:/opt/rbenv/bin:/usr/bin:$PATH; eval "$(rbenv init -)"; \
-                         cd :path && bin/rails runner -e :environment ':task' :output } #{}"cd :path && bin/rails runner -e :environment ':task' :output"
+
+job_type :rake,   %q{ cd :path && PATH=:env_path:"$PATH" RAILS_ENV=:environment bundle exec rake :task --silent :output }
+job_type :runner, %q{ cd :path && PATH=:env_path:"$PATH" script/rails runner -e :environment ':task' :output }
+job_type :script, %q{ cd :path && PATH=:env_path:"$PATH" RAILS_ENV=:environment bundle exec script/:task :output }
 
 every 10.minutes do
-	lab_runner "ChannelsWorker.perform_async"
+	runner "ChannelsWorker.perform_async"
 end
