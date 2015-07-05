@@ -19,6 +19,8 @@ set :output, "log/cron.log"
 # end
 
 # Learn more: http://github.com/javan/whenever
+job_type :lab_runner, "eval '$(rbenv init -)'; cd :path && bin/rails runner -e :environment ':task' :output"
+
 every 10.minutes do
-	runner "ChannelsWorker.perform_async"
+	lab_runner "ChannelsWorker.perform_async"
 end
