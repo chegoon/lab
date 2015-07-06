@@ -37,6 +37,8 @@ gem "twitter-bootstrap-rails"
 gem 'whenever', :require => false
 gem 'sidekiq'
 gem 'passenger'
+#gem "chartkick"
+#gem 'groupdate'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
