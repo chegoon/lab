@@ -45,7 +45,7 @@
       <th>Description</th>
       <th>Tags</th>
     </tr>
-  <%  @playlists.order("created_at DESC").each do |pl| %>
+  <%  @playlists.order("published_at DESC").each do |pl| %>
     <tr >
       <td><%= link_to image_tag(pl.thumbnail_url), pl %><br/><%= pl.title %></td>
       <td><%= pl.description %></td>
@@ -62,7 +62,7 @@
       <th>Description</th>
       <th>View</th>
     </tr>
-  <%  @videos.order("created_at DESC").first(10).each do |v| %>
+  <%  @videos.order("published_at DESC").first(10).each do |v| %>
     <tr >
       <td><%= link_to image_tag(v.thumbnail_url), v %><br/><%= v.title %></td>
       <td><%= v.description %></td>
