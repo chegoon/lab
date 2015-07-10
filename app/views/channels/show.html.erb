@@ -30,10 +30,10 @@
 <%  @channel_stats.each_with_index do |stat, i| %>
   <tr >
     <td><%= stat.created_at.getlocal.strftime("%F %R") %></td>
-    <td style="text-align:right; padding-right:10px; "><%= link_to number_with_delimiter(stat.video_count), channel_videos_path(@channel.id) %><%= " (+#{(stat.video_count - delta.video_count).to_i})" if i != 0 && (stat.video_count - delta.video_count).to_i != 0 %></td>
-    <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(stat.view_count) %><%= " (+#{(stat.view_count - delta.view_count).to_i})" if i != 0 && (stat.view_count - delta.view_count).to_i != 0 %></td>
-    <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(stat.comment_count) %><%= " (+#{(stat.comment_count - delta.comment_count).to_i})" if i != 0 && (stat.comment_count - delta.comment_count).to_i != 0 %></td>
-    <td  style="text-align:right; padding-right:10px; "><%= number_with_delimiter(stat.subscriber_count) %><%= " (+#{(stat.subscriber_count - delta.subscriber_count).to_i})" if i != 0 && (stat.subscriber_count - delta.subscriber_count).to_i != 0 %></td>
+    <td style="text-align:right; padding-right:10px; "><%= link_to number_with_delimiter(stat.video_count), channel_videos_path(@channel.id) %><%= num_diff(stat.video_count, delta.video_count) if i != 0  %></td>
+    <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(stat.view_count) %><%= num_diff(stat.view_count, delta.view_count) if i != 0  %></td>
+    <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(stat.comment_count) %><%= num_diff(stat.comment_count, delta.comment_count) if i != 0  %></td>
+    <td  style="text-align:right; padding-right:10px; "><%= number_with_delimiter(stat.subscriber_count) %><%= num_diff(stat.subscriber_count, delta.subscriber_count) if i != 0  %></td>
   </tr>
 <%  end %>
 </table>
