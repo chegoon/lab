@@ -26,8 +26,8 @@
     <th style="text-align:right; padding-right:10px; ">Subscriber #</th>
   </tr>
 
-<% delta = @channel_stats.first %>
 <%  @channel_stats.each_with_index do |stat, i| %>
+<% delta = @channel_stats.first %>
   <tr >
     <td><%= stat.created_at.getlocal.strftime("%F %R") %></td>
     <td style="text-align:right; padding-right:10px; "><%= link_to number_with_delimiter(stat.video_count), channel_videos_path(@channel.id) %><%= num_diff(stat.video_count, delta.video_count) if i != 0  %></td>
