@@ -23,9 +23,9 @@
       <td><%= i+1 %></td>
       <td>
         <div class="media">
-          <div class="media-left media">
+          <div class="media-left pull-left">
             <a href="<%= channel_path(channel) %>">
-              <%= image_tag(channel.thumbnail_url, :class => "media-object") %>
+              <%= image_tag(channel.thumbnail_url, :class => "media-object", :style => "width:64px; height: 64px;") %>
             </a>
           </div>
           <div class="media-body">

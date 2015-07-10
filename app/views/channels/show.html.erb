@@ -3,17 +3,18 @@
   <h1><%= @channel.title %></h1>
 </div>
 <div class="media">
-  <div class="media-left media-middle">
+  <div class="media-left pull-left">
     <a href="#">
       <%= image_tag @channel.thumbnail_url, :class => "media-object" %>
     </a>
   </div>
   <div class="media-body">
-    <h4 class="media-heading">Middle aligned media</h4>
+    <h4 class="media-heading"><%= @channel.title %></h4>
     <%= @channel.description %>
   </div>
 </div>
 <% if @channel_stats %>
+<h3>Stats <small>채널 통계</small></h3>
 <table class="table">
   <tr>
     <th>Date</th>
@@ -23,7 +24,6 @@
     <th style="text-align:right; padding-right:10px; ">Subscriber #</th>
   </tr>
 
-<h3>Stats <small>채널 통계</small></h3>
 <% delta = @channel_stats.first %>
 <% @channel_stats.each_with_index do |stat, i| %>
 

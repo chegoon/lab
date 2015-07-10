@@ -13,7 +13,7 @@ class ChannelsController < ApplicationController
   def show
     @channel_stats = @channel.channel_statistics
     @playlists = @channel.playlists
-    @videos = @channel.videos
+    @videos = @channel.videos.ordery("created_at DESC").limit(5)
   end
 
   # GET /channels/new
