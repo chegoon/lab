@@ -11,7 +11,7 @@ class ChannelsController < ApplicationController
   # GET /channels/1
   # GET /channels/1.json
   def show
-    @channel_stats = @channel.channel_statistics.order("created_at DESC")
+    @channel_stats = @channel.channel_statistics#.order("created_at ASC")
     @playlists = @channel.playlists
     @videos = @channel.videos
   end

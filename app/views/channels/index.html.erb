@@ -19,16 +19,17 @@
   </thead>
   <tbody>
     <% @channels.each_with_index do |channel, i| %>
+    <% delta = channel.channel_statistics.offset(1).last %>
       <tr>
         <td><%= i+1 %></td>
         <td><%= link_to image_tag(channel.thumbnail_url), channel_path(channel) %></td>
 
         <td><%= channel.title %></td>
         <td style="text-align:right; padding-right:10px; "><%= channel.published_at.to_date if channel.published_at %></td>
-        <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.video_count) if channel.video_count %></td>
-        <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.subscriber_count) if channel.subscriber_count %></td>
-        <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.view_count) if channel.view_count %></td>
-        <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.comment_count) if channel.comment_count %></td>
+        <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.video_count) if channel.video_count %><%= " (+#{(channel.video_count - delta.video_count).to_i})" if i != 0 && (channel.video_count - delta.video_count).to_i != 0 %></td>
+        <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.subscriber_count) if channel.subscriber_count %><%= " (+#{(channel.subscriber_count - delta.subscriber_count).to_i})" if i != 0 && (channel.subscriber_count - delta.subscriber_count).to_i != 0 %></td>
+        <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.view_count) if channel.view_count %><%= " (+#{(channel.view_count - delta.view_count).to_i})" if i != 0 && (channel.video_count - delta.video_count).to_i != 0 %></td>
+        <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.comment_count) if channel.comment_count %><%= " (+#{(channel.comment_count - delta.comment_count).to_i})" if i != 0 && (channel.comment_count - delta.comment_count).to_i != 0 %></td>
         
         <!--
         <td>
