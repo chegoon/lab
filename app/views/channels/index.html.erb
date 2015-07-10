@@ -30,7 +30,7 @@
           </div>
           <div class="media-body">
             <h4 class="media-heading"><%= channel.title %></h4>
-            <%= channel.description %>
+            <p><%= channel.description %></p>
             <%= "From #{channel.published_at.to_date}" if channel.published_at %>
           </div>
         </div>

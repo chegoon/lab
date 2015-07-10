@@ -1,43 +1,37 @@
 <%- model_class = Video -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%= @video.title %> <small>by <%= link_to @video.channel.title, channel_path(@video.channel) %></small></h1>
+</div>
+<h2><%= link_to image_tag(@video.channel.thumbnail_url, :class => "media-object", :style => "width:64px; height: 64px;"), channel_path(@video.channel) %></h2>
+<div class="embed-responsive embed-responsive-16by9">
+  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= @video.v_id %>"></iframe>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:v_id) %>:</strong></dt>
-  <dd><%= @video.v_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @video.title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @video.description %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:published_at) %>:</strong></dt>
-  <dd><%= @video.published_at %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:thumbnail_url) %>:</strong></dt>
-  <dd><%= @video.thumbnail_url %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:channel_id) %>:</strong></dt>
-  <dd><%= @video.channel_id %></dd>
-</dl>
-
 <% if @video_stats %>
-<table class="table">
+<h3>Stats <small>Video 통계</small></h3>
+<table class="table table-striped">
   <tr>
     <th>Date</th>
-    <th>View #</th>
-    <th>Like #</th>
-    <th>Dislike #</th>
-    <th>Favorite #</th>
-    <th>Comment #</th>
+    <th style="text-align:right;">View #</th>
+    <th style="text-align:right;">Like #</th>
+    <th style="text-align:right;">Dislike #</th>
+    <th style="text-align:right;">Favorite #</th>
+    <th style="text-align:right;">Comment #</th>
   </tr>
-<%  @video_stats.each do |stat| %>
+
+<% delta = @video_stats.first %>
+<% @video_stats.each_with_index do |stat, i| %>
   <tr >
     <td><%= stat.created_at.to_date %></td>
-    <td style="text-align:right;"><%= number_with_delimiter(stat.view_count) %></td>
-    <td style="text-align:right;"><%= number_with_delimiter(stat.like_count) %></td>
-    <td style="text-align:right;"><%= number_with_delimiter(stat.dislike_count) %></td>
-    <td style="text-align:right;"><%= number_with_delimiter(stat.favorite_count) %></td>
-    <td style="text-align:right;"><%= number_with_delimiter(stat.comment_count) %></td>
+    <td style="text-align:right;"><%= number_with_delimiter(stat.view_count) %><%= num_diff(stat.view_count, delta.view_count) if delta && i != 0  %></td>
+    <td style="text-align:right;"><%= number_with_delimiter(stat.like_count) %><%= num_diff(stat.like_count, delta.like_count) if delta && i != 0  %></td>
+    <td style="text-align:right;"><%= number_with_delimiter(stat.dislike_count) %><%= num_diff(stat.dislike_count, delta.dislike_count) if delta && i != 0  %></td>
+    <td style="text-align:right;"><%= number_with_delimiter(stat.favorite_count) %><%= num_diff(stat.favorite_count, delta.favorite_count) if delta && i != 0  %></td>
+    <td style="text-align:right;"><%= number_with_delimiter(stat.comment_count) %><%= num_diff(stat.comment_count, delta.comment_count) if delta && i != 0  %></td>
     
   </tr>
+
+<% delta = stat %>
 <%  end %>
 </table>
 <% end %>
@@ -46,8 +40,8 @@
               videos_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_video_path(@video), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+<!-- <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               video_path(@video),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+              :class => 'btn btn-danger' %> -->

@@ -2,17 +2,19 @@
 <div class="page-header">
   <h1><%= @channel.title %></h1>
 </div>
-<div class="media">
-  <div class="media-left pull-left">
-    <a href="#">
-      <%= image_tag @channel.thumbnail_url, :class => "media-object" %>
-    </a>
+
+  <div class="media">
+    <div class="media-left pull-left">
+      <a href="#">
+        <%= image_tag @channel.thumbnail_url, :class => "media-object" %>
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading"><%= @channel.title %></h4>
+      <%= @channel.description %>
+    </div>
   </div>
-  <div class="media-body">
-    <h4 class="media-heading"><%= @channel.title %></h4>
-    <%= @channel.description %>
-  </div>
-</div>
+
 <% if @channel_stats %>
 <h3>Stats <small>채널 통계</small></h3>
 <table class="table">
@@ -56,29 +58,37 @@
 </table>
 <% end %>
 
-<h3>Videos <small>최신 5개 비디오</small></h3>
-<% if @videos %>
-  <table class="table">
-    <tr>
-      <th>Video Title</th>
-      <th>Description</th>
-      <th>View</th>
-    </tr>
-  <%  @videos.order("published_at DESC").first(10).each do |v| %>
-    <tr >
-      <td><%= link_to image_tag(v.thumbnail_url), v %><br/><%= v.title %></td>
-      <td><%= v.description %></td>
-      <td><%= v.created_at %></td>
-    </tr>
-  <%  end %>
-</table>
-<% end %>
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              channels_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_channel_path(@channel), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              channel_path(@channel),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+<div class="row">
+  <h3>Videos <small>최신 5개 비디오</small></h3>
+  <% if @videos %>
+    <%  @videos.each do |v| %>
+      <div class="media">
+        <div class="media-left pull-left">
+          <a href="<%= video_path(v) %>">
+            <%= image_tag(v.thumbnail_url, :class => "media-object") %>
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading"><%= v.title %></h4>
+          <%= v.description %>
+          <%= "From #{v.published_at.to_date}" if v.published_at %>
+        </div>
+      </div>
+    <%  end %>
+  <% end %>
+</div>
+<div class="row">
+    <ol class="breadcrumb">
+      <li><%= link_to t('.back', :default => t("helpers.links.back")),
+                  channels_path, :class => 'btn btn-default'  %></li>
+      <li> <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                  edit_channel_path(@channel), :class => 'btn btn-default' %></li>
+    </ol>
+</div>
+    <!-- <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                  channel_path(@channel),
+                  :method => 'delete',
+                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                  :class => 'btn btn-danger' %> -->
+
+
