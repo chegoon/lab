@@ -11,7 +11,7 @@ module ApplicationHelper
 		if display_flag == true && ret > 0
 			return " (+#{number_with_delimiter(ret)})"
 		elsif display_flag == true && ret < 0
-			return number_with_delimiter(ret)
+			return " (#{number_with_delimiter(ret)})"
 		end
 	end	
 end
