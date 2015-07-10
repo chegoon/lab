@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629165323) do
+ActiveRecord::Schema.define(version: 20150710055307) do
 
   create_table "channel_statistics", force: true do |t|
     t.integer  "channel_id"
@@ -38,13 +38,14 @@ ActiveRecord::Schema.define(version: 20150629165323) do
     t.integer  "dislike_count"
     t.integer  "subscriber_count"
     t.integer  "comment_count"
+    t.boolean  "joined"
   end
 
   create_table "playlist_items", force: true do |t|
     t.integer  "playlist_id"
     t.integer  "video_id"
     t.string   "it_id"
-    t.string   "title"
+    t.string   "title",         limit: 250
     t.text     "description"
     t.datetime "published_at"
     t.string   "thumbnail_url"
@@ -58,11 +59,11 @@ ActiveRecord::Schema.define(version: 20150629165323) do
 
   create_table "playlists", force: true do |t|
     t.integer  "pl_id"
-    t.string   "title"
+    t.string   "title",         limit: 250
     t.text     "description"
     t.string   "thumbnail_url"
     t.datetime "published_at"
-    t.text     "tags"
+    t.text     "tags",          limit: 16777215
     t.integer  "channel_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -99,7 +100,7 @@ ActiveRecord::Schema.define(version: 20150629165323) do
 
   create_table "videos", force: true do |t|
     t.string   "v_id"
-    t.string   "title"
+    t.string   "title",         limit: 250
     t.text     "description"
     t.datetime "published_at"
     t.string   "thumbnail_url"

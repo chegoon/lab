@@ -1,21 +1,18 @@
 <%- model_class = Channel -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%= @channel.title %></h1>
 </div>
-
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:ch_id) %>:</strong></dt>
-  <dd><%= @channel.ch_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @channel.title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @channel.description %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:published_at) %>:</strong></dt>
-  <dd><%= @channel.published_at %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:thumbnail_url) %>:</strong></dt>
-  <dd><%= image_tag @channel.thumbnail_url %></dd>
-</dl>
-
+<div class="media">
+  <div class="media-left media-middle">
+    <a href="#">
+      <%= image_tag @channel.thumbnail_url, :class => "media-object" %>
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">Middle aligned media</h4>
+    <%= @channel.description %>
+  </div>
+</div>
 <% if @channel_stats %>
 <table class="table">
   <tr>
@@ -26,6 +23,7 @@
     <th style="text-align:right; padding-right:10px; ">Subscriber #</th>
   </tr>
 
+<h3>Stats <small>채널 통계</small></h3>
 <% delta = @channel_stats.first %>
 <% @channel_stats.each_with_index do |stat, i| %>
 
@@ -40,7 +38,7 @@
 <%  end %>
 </table>
 <% end %>
-
+<h3>Playlist </h3>
 <% if @playlists %>
   <table class="table">
     <tr>
@@ -58,6 +56,7 @@
 </table>
 <% end %>
 
+<h3>Videos <small>최신 5개 비디오</small></h3>
 <% if @videos %>
   <table class="table">
     <tr>

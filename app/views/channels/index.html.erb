@@ -1,14 +1,13 @@
-<%- model_class = Channel -%> Refresh every 3hrs
+<%- model_class = Channel -%> 
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1>Creators Dashboard <small>Refresh every 3hrs</small></h1>
 </div>
+
 <table class="table table-striped">
   <thead>
     <tr>
       <th>No.</th>
       <th>Creator</th>
-      <th></th>
-      <th style="text-align:right; padding-right:10px; "><%= model_class.human_attribute_name(:published_at) %></th>
       <th style="text-align:right; padding-right:10px; "><%= model_class.human_attribute_name(:video_count) %></th>
       <th style="text-align:right; padding-right:10px; "><%= model_class.human_attribute_name(:subcriber_count) %></th>
       <th style="text-align:right; padding-right:10px; "><%= model_class.human_attribute_name(:view_count) %></th>
@@ -20,29 +19,27 @@
   <tbody>
     <% @channels.each_with_index do |channel, i| %>
     <% delta = channel.channel_statistics.offset(1).last %>
-      <tr>
-        <td><%= i+1 %></td>
-        <td><%= link_to image_tag(channel.thumbnail_url), channel_path(channel) %></td>
-
-        <td><%= channel.title %></td>
-        <td style="text-align:right; padding-right:10px; "><%= channel.published_at.to_date if channel.published_at %></td>
-        <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.video_count) if channel.video_count %><%= num_diff(channel.video_count, delta.video_count) if delta && i != 0  %></td>
-        <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.subscriber_count) if channel.subscriber_count %><%= num_diff(channel.subscriber_count, delta.subscriber_count) if delta && i != 0  %></td>
-        <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.view_count) if channel.view_count %><%= num_diff(channel.view_count, delta.view_count) if delta && i != 0  %></td>
-        <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.comment_count) if channel.comment_count %><%= num_diff(channel.comment_count, delta.comment_count) if delta && i != 0  %></td>
-        
-        <!--
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_channel_path(channel), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      channel_path(channel),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
-      -->
-      </tr>
+    <tr <%= "class=joined" if channel.joined %> >
+      <td><%= i+1 %></td>
+      <td>
+        <div class="media">
+          <div class="media-left media">
+            <a href="<%= channel_path(channel) %>">
+              <%= image_tag(channel.thumbnail_url, :class => "media-object") %>
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading"><%= channel.title %></h4>
+            <%= channel.description %>
+            <%= "From #{channel.published_at.to_date}" if channel.published_at %>
+          </div>
+        </div>
+      </td>
+      <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.video_count) if channel.video_count %><%= num_diff(channel.video_count, delta.video_count) if delta && i != 0  %></td>
+      <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.subscriber_count) if channel.subscriber_count %><%= num_diff(channel.subscriber_count, delta.subscriber_count) if delta && i != 0  %></td>
+      <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.view_count) if channel.view_count %><%= num_diff(channel.view_count, delta.view_count) if delta && i != 0  %></td>
+      <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.comment_count) if channel.comment_count %><%= num_diff(channel.comment_count, delta.comment_count) if delta && i != 0  %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>
