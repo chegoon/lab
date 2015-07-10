@@ -27,7 +27,7 @@
   </tr>
 
 <%  @channel_stats.each_with_index do |stat, i| %>
-<% delta = @channel_stats.first %>
+<% delta = @channel_stats.offset(1).last %>
   <tr >
     <td><%= stat.created_at.getlocal.strftime("%F %R") %></td>
     <td style="text-align:right; padding-right:10px; "><%= link_to number_with_delimiter(stat.video_count), channel_videos_path(@channel.id) %><%= num_diff(stat.video_count, delta.video_count) if i != 0  %></td>
