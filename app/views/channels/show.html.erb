@@ -15,7 +15,7 @@
       <%= @channel.description %>
     </div>
   </div>
-
+<%= line_chart @channel_stats.group_by_day(:created_at).maximum("subscriber_count") %>
 <% if @channel_stats %>
 <h3>Stats <small>채널 통계</small></h3>
 <table class="table">
