@@ -24,8 +24,10 @@
 <%= line_chart @video_stats.group_by_day(:created_at).maximum("like_count") %>
 <h4>Dislikes <small>싫어요 통계</small></h4>
 <%= line_chart @video_stats.group_by_day(:created_at).maximum("dislike_count") %>
+<!--
 <h4>Favorites <small>Fab. 통계</small></h4>
 <%= line_chart @video_stats.group_by_day(:created_at).maximum("favorite_count") %>
+-->
 <h4>Comments <small>댓글 통계</small></h4>
 <%= line_chart @video_stats.group_by_day(:created_at).maximum("comment_count") %>
 <h4>Detail <small>통계 상세</small></h4>
