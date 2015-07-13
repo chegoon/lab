@@ -23,7 +23,7 @@
 <% delta = @video_stats.first %>
 <% @video_stats.each_with_index do |stat, i| %>
   <tr >
-    <td><%= stat.created_at.to_date %></td>
+    <td><%= stat.created_at.getlocal.strftime("%F %R") %></td>
     <td style="text-align:right;"><%= number_with_delimiter(stat.view_count) %><%= num_diff(stat.view_count, delta.view_count) if delta && i != 0  %></td>
     <td style="text-align:right;"><%= number_with_delimiter(stat.like_count) %><%= num_diff(stat.like_count, delta.like_count) if delta && i != 0  %></td>
     <td style="text-align:right;"><%= number_with_delimiter(stat.dislike_count) %><%= num_diff(stat.dislike_count, delta.dislike_count) if delta && i != 0  %></td>
