@@ -7,7 +7,13 @@
 <div class="embed-responsive embed-responsive-16by9">
   <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= @video.v_id %>"></iframe>
 </div>
-
+<%= line_chart [
+            {name: "Views", data: @video_stats.group_by_day(:created_at).maximum("view_count")},
+            {name: "Likes", data: @video_stats.group_by_day(:created_at).maximum("like_count")}, 
+            {name: "Dislikes", data: @video_stats.group_by_day(:created_at).maximum("dislike_count")}, 
+            {name: "Favorites", data: @video_stats.group_by_day(:created_at).maximum("favorite_count")}, 
+            {name: "Comments", data: @video_stats.group_by_day(:created_at).maximum("comment_count")}
+              ] %>
 <% if @video_stats %>
 <h3>Stats <small>Video 통계</small></h3>
 <table class="table table-striped">
