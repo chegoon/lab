@@ -14,14 +14,24 @@
       <h4 class="media-heading"><%= @channel.title %></h4>
       <%= @channel.description %>
     </div>
-  </div>
+  </div>         
+<% if @channel_stats %>
+<!--  
 <%= line_chart [
             {name: "Videos", data: @channel_stats.group_by_day(:created_at).maximum("video_count")}, 
             {name: "Views", data: @channel_stats.group_by_day(:created_at).maximum("view_count")},
             {name: "Subscribers", data: @channel_stats.group_by_day(:created_at).maximum("subscriber_count")}
               ] %>
-<% if @channel_stats %>
+
+-->     
 <h3>Stats <small>채널 통계</small></h3>
+<h4>Videos <small>비디오 통계</small></h4>
+<%= line_chart @channel_stats.group_by_day(:created_at).maximum("video_count") %>
+<h4>Views <small>조회수 통계</small></h4>
+<%= line_chart @channel_stats.group_by_day(:created_at).maximum("view_count") %>
+<h4>Subscriber <small>구독자 통계</small></h4>
+<%= line_chart @channel_stats.group_by_day(:created_at).maximum("subscriber_count") %>
+<h4>Detail <small>통계 상세</small></h4>
 <table class="table">
   <tr>
     <th>Date</th>

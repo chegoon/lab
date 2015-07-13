@@ -7,6 +7,8 @@
 <div class="embed-responsive embed-responsive-16by9">
   <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= @video.v_id %>"></iframe>
 </div>
+<% if @video_stats %>
+<!--
 <%= line_chart [
             {name: "Views", data: @video_stats.group_by_day(:created_at).maximum("view_count")},
             {name: "Likes", data: @video_stats.group_by_day(:created_at).maximum("like_count")}, 
@@ -14,8 +16,19 @@
             {name: "Favorites", data: @video_stats.group_by_day(:created_at).maximum("favorite_count")}, 
             {name: "Comments", data: @video_stats.group_by_day(:created_at).maximum("comment_count")}
               ] %>
-<% if @video_stats %>
+-->
 <h3>Stats <small>Video 통계</small></h3>
+<h4>Views <small>조회수 통계</small></h4>
+<%= line_chart @video_stats.group_by_day(:created_at).maximum("view_count") %>
+<h4>Likes <small>좋아요 통계</small></h4>
+<%= line_chart @video_stats.group_by_day(:created_at).maximum("like_count") %>
+<h4>Dislikes <small>싫어요 통계</small></h4>
+<%= line_chart @video_stats.group_by_day(:created_at).maximum("dislike_count") %>
+<h4>Favorites <small>Fab. 통계</small></h4>
+<%= line_chart @video_stats.group_by_day(:created_at).maximum("favorite_count") %>
+<h4>Comments <small>댓글 통계</small></h4>
+<%= line_chart @video_stats.group_by_day(:created_at).maximum("comment_count") %>
+<h4>Detail <small>통계 상세</small></h4>
 <table class="table table-striped">
   <tr>
     <th>Date</th>
