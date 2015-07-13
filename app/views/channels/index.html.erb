@@ -20,7 +20,7 @@
   <tbody>
     <% @channels.each_with_index do |channel, i| %>
     <% delta = channel.channel_statistics.offset(1).last %>
-    <tr <%= "class=joined" if channel.joined %> >
+    <tr <%= "class=joined" if channel.joined %> onClick=document.location=<%= "'#{channel_path(channel)}'" %>; style="cursor: pointer;">
       <td><%= i+1 %></td>
       <td>
         <div class="media">
