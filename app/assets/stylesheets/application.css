@@ -19,9 +19,9 @@
   background-position: right center;
 }
 .table th .asc { 
-  background-image: url("<%= image_path 'up_arrow.gif' %>"); 
+  background-image: image-url('up_arrow.gif') 
 }
 
 .table th .desc { 
-  background-image: url("<%= image_path 'down_arrow.gif' %>"); 
+  background-image: image-url('down_arrow.gif') 
 }
