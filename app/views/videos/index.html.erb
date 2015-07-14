@@ -18,7 +18,7 @@
     <% @videos.each_with_index do |v, i| %>
     <% delta = v.video_statistics.offset(1).last %>
     <tr  onClick=document.location=<%= "'#{video_path(v)}'" %>; style="cursor: pointer;">
-      <td><%= i+1 %></td>
+      <td><%= (@videos.current_page - 1) * @videos.per_page + i + 1 %></td>
       <td><%= image_tag(v.channel.thumbnail_url, :class => "media-object", :style => "width:64px; height: 64px;") %></td>
       <td >
         <div class="media">
@@ -38,3 +38,4 @@
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @videos, renderer: BootstrapPagination::Rails %>
