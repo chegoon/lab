@@ -13,10 +13,10 @@
       <p><%= @video.description %></p>
       <ul class="list-unstyled">
         <li>Upload  <%= @video.published_at.to_date %></li>
-        <li>Views  <%= number_with_delimiter(@video.video_statistics.last.view_count) %></li>
-        <li>Likes  <%= number_with_delimiter(@video.video_statistics.last.like_count) %></li>
-        <li>Dislikes  <%= number_with_delimiter(@video.video_statistics.last.dislike_count) %></li>
-        <li>Comments  <%= number_with_delimiter(@video.video_statistics.last.comment_count) %>
+        <li>Views  <%= number_with_delimiter(@video.view_count) %></li>
+        <li>Likes  <%= number_with_delimiter(@video.like_count) %></li>
+        <li>Dislikes  <%= number_with_delimiter(@video.dislike_count) %></li>
+        <li>Comments  <%= number_with_delimiter(@video.comment_count) %>
       </ul>
     </div>
   </div>       

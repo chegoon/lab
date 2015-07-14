@@ -1,7 +1,7 @@
 <%- model_class = Video -%> 
 <p class="pull-right">At <%= Time.now.getlocal.strftime("%F %R") %>, refresh every 3hrs</p>
 <div class="page-header">
-  <h1>Videos Dashboard <small><%= @videos.count %> videos</small></h1>
+  <h1>Videos Dashboard <small><%= number_with_delimiter(@videos.count) %> videos</small></h1>
 </div>
 
 <table class="table table-striped">
@@ -43,9 +43,9 @@
         </div>
       </td>
       <td style="text-align:right; padding-right:10px; "><%= v.published_at.getlocal.strftime("%F %R") %></td>
-      <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(v.video_statistics.last.view_count) %></td>
-      <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(v.video_statistics.last.like_count) %></td>
-      <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(v.video_statistics.last.comment_count) %></td>
+      <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(v.view_count) %></td>
+      <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(v.like_count) %></td>
+      <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(v.comment_count) %></td>
     </tr>
     <% end %>
   </tbody>
