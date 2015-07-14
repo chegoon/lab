@@ -1,10 +1,12 @@
 class ChannelsController < ApplicationController
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
 
+  helper_method :sort_column, :sort_direction
   # GET /channels
   # GET /channels.json
   def index
-    @channels = Channel.order("subscriber_count DESC").page(params[:page])
+    #@channels = Channel.order("subscriber_count DESC").page(params[:page])
+    @channels = Channel.order(sort_column + ' ' + sort_direction).page(params[:page])
     #ChannelsWorker.perform_async
   end
 
@@ -89,4 +91,10 @@ class ChannelsController < ApplicationController
     def channel_params
       params.require(:channel).permit(:ch_id, :title, :description, :published_at, :thumbnail_url, :video_count, :view_count, :subscriber_count, :comment_count, :joined)
     end
+    def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
+  end
+  def sort_column
+    Channel.column_names.include?(params[:sort]) ? params[:sort] : "subscriber_count"
+  end
 end

@@ -1,7 +1,7 @@
 <%- model_class = Channel -%> 
 <p class="pull-right">At <%= Time.now.getlocal.strftime("%F %R") %>, refresh every 3hrs</p>
 <div class="page-header">
-  <h1>Creators Dashboard <small>채널 대시보드</small></h1>
+  <h1>Creators Dashboard <small><%= @channels.count %> channels</small></h1>
 </div>
 
 <table class="table table-striped">
@@ -9,11 +9,16 @@
     <tr>
       <th>No.</th>
       <th>Creator</th>
+<!--      
       <th style="text-align:right; padding-right:10px; ">Videos</th>
       <th style="text-align:right; padding-right:10px; ">Subscribers</th>
       <th style="text-align:right; padding-right:10px; ">Views</th>
       <th style="text-align:right; padding-right:10px; ">Comments</th>
-      
+-->
+      <th style="text-align:right; padding-right:10px; "><%= sortable "video_count", "Videos" %></th>
+      <th style="text-align:right; padding-right:10px; "><%= sortable "subscriber_count", "Subscribers" %></th>
+      <th style="text-align:right; padding-right:10px; "><%= sortable "view_count", "Views" %></th>
+      <th style="text-align:right; padding-right:10px; "><%= sortable "comment_count", "Comments" %></th>
       <!-- <th><%=t '.actions', :default => t("helpers.actions") %></th> -->
     </tr>
   </thead>
