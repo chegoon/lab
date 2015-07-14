@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710055307) do
+ActiveRecord::Schema.define(version: 20150714055501) do
 
   create_table "channel_statistics", force: true do |t|
     t.integer  "channel_id"
@@ -100,13 +100,18 @@ ActiveRecord::Schema.define(version: 20150710055307) do
 
   create_table "videos", force: true do |t|
     t.string   "v_id"
-    t.string   "title",         limit: 250
+    t.string   "title",          limit: 250
     t.text     "description"
     t.datetime "published_at"
     t.string   "thumbnail_url"
     t.integer  "channel_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "view_count"
+    t.integer  "like_count"
+    t.integer  "dislike_count"
+    t.integer  "favorite_count"
+    t.integer  "comment_count"
   end
 
   add_index "videos", ["channel_id"], name: "index_videos_on_channel_id", using: :btree
