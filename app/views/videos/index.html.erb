@@ -43,4 +43,6 @@
     <% end %>
   </tbody>
 </table>
-<%= will_paginate @videos, renderer: BootstrapPagination::Rails %>
+<div class="container">
+  <%= will_paginate @videos, renderer: BootstrapPagination::Rails %>
+</div>

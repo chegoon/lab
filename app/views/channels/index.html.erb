@@ -44,7 +44,9 @@
     <% end %>
   </tbody>
 </table>
-<%= will_paginate @channels, renderer: BootstrapPagination::Rails %>
+<div class="container">
+  <%= will_paginate @channels, renderer: BootstrapPagination::Rails %>
+</div>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_channel_path,
