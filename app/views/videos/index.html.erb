@@ -1,7 +1,7 @@
 <%- model_class = Video -%> 
 <p class="pull-right">At <%= Time.now.getlocal.strftime("%F %R") %>, refresh every 3hrs</p>
 <div class="page-header">
-  <h1>Videos Dashboard <small>Refresh every 3hrs</small></h1>
+  <h1>Videos Dashboard <small>비디오 대시보드</small></h1>
 </div>
 
 <table class="table table-striped">
@@ -17,10 +17,10 @@
   <tbody>
     <% @videos.each_with_index do |v, i| %>
     <% delta = v.video_statistics.offset(1).last %>
-    <tr  >
+    <tr  onClick=document.location=<%= "'#{video_path(v)}'" %>; style="cursor: pointer;">
       <td><%= i+1 %></td>
-      <td><%= link_to image_tag(v.channel.thumbnail_url, :class => "media-object", :style => "width:64px; height: 64px;"), channel_path(v.channel) %></td>
-      <td>
+      <td><%= image_tag(v.channel.thumbnail_url, :class => "media-object", :style => "width:64px; height: 64px;") %></td>
+      <td >
         <div class="media">
           <div class="media-left pull-left">
             <a href="<%= video_path(v) %>">

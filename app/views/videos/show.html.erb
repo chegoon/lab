@@ -3,7 +3,23 @@
 <div class="page-header">
   <h1><%= @video.title %> <small>by <%= link_to @video.channel.title, channel_path(@video.channel) %></small></h1>
 </div>
-<h2><%= link_to image_tag(@video.channel.thumbnail_url, :class => "media-object", :style => "width:64px; height: 64px;"), channel_path(@video.channel) %></h2>
+
+  <div class="media">
+    <div class="media-left pull-left">
+      <%= link_to image_tag(@video.channel.thumbnail_url, :class => "media-object", :style => "width:64px; height: 64px;"), channel_path(@video.channel) %>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">비디오 정보</h4>
+      <p><%= @video.description %></p>
+      <ul class="list-unstyled">
+        <li>Views  <%= number_with_delimiter(@video.video_statistics.last.view_count) %></li>
+        <li>Likes  <%= number_with_delimiter(@video.video_statistics.last.like_count) %></li>
+        <li>Dislikes  <%= number_with_delimiter(@video.video_statistics.last.dislike_count) %></li>
+        <li>Comments  <%= number_with_delimiter(@video.video_statistics.last.comment_count) %>
+      </ul>
+    </div>
+  </div>       
+
 <div class="embed-responsive embed-responsive-16by9">
   <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= @video.v_id %>"></iframe>
 </div>
@@ -30,32 +46,47 @@
 -->
 <h4>Comments <small>댓글 통계</small></h4>
 <%= line_chart @video_stats.group_by_day(:created_at).maximum("comment_count") %>
-<h4>Detail <small>통계 상세</small></h4>
-<table class="table table-striped">
-  <tr>
-    <th>Date</th>
-    <th style="text-align:right;">View #</th>
-    <th style="text-align:right;">Like #</th>
-    <th style="text-align:right;">Dislike #</th>
-    <th style="text-align:right;">Favorite #</th>
-    <th style="text-align:right;">Comment #</th>
-  </tr>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Detail <small>통계 상세</small>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <table class="table table-striped">
+          <tr>
+            <th>Date</th>
+            <th style="text-align:right;">View #</th>
+            <th style="text-align:right;">Like #</th>
+            <th style="text-align:right;">Dislike #</th>
+            <th style="text-align:right;">Favorite #</th>
+            <th style="text-align:right;">Comment #</th>
+          </tr>
 
-<% delta = @video_stats.first %>
-<% @video_stats.each_with_index do |stat, i| %>
-  <tr >
-    <td><%= stat.created_at.getlocal.strftime("%F %R") %></td>
-    <td style="text-align:right;"><%= number_with_delimiter(stat.view_count) %><%= num_diff(stat.view_count, delta.view_count) if delta && i != 0  %></td>
-    <td style="text-align:right;"><%= number_with_delimiter(stat.like_count) %><%= num_diff(stat.like_count, delta.like_count) if delta && i != 0  %></td>
-    <td style="text-align:right;"><%= number_with_delimiter(stat.dislike_count) %><%= num_diff(stat.dislike_count, delta.dislike_count) if delta && i != 0  %></td>
-    <td style="text-align:right;"><%= number_with_delimiter(stat.favorite_count) %><%= num_diff(stat.favorite_count, delta.favorite_count) if delta && i != 0  %></td>
-    <td style="text-align:right;"><%= number_with_delimiter(stat.comment_count) %><%= num_diff(stat.comment_count, delta.comment_count) if delta && i != 0  %></td>
-    
-  </tr>
+        <% delta = @video_stats.first %>
+        <% @video_stats.each_with_index do |stat, i| %>
+          <tr >
+            <td><%= stat.created_at.getlocal.strftime("%F %R") %></td>
+            <td style="text-align:right;"><%= number_with_delimiter(stat.view_count) %><%= num_diff(stat.view_count, delta.view_count) if delta && i != 0  %></td>
+            <td style="text-align:right;"><%= number_with_delimiter(stat.like_count) %><%= num_diff(stat.like_count, delta.like_count) if delta && i != 0  %></td>
+            <td style="text-align:right;"><%= number_with_delimiter(stat.dislike_count) %><%= num_diff(stat.dislike_count, delta.dislike_count) if delta && i != 0  %></td>
+            <td style="text-align:right;"><%= number_with_delimiter(stat.favorite_count) %><%= num_diff(stat.favorite_count, delta.favorite_count) if delta && i != 0  %></td>
+            <td style="text-align:right;"><%= number_with_delimiter(stat.comment_count) %><%= num_diff(stat.comment_count, delta.comment_count) if delta && i != 0  %></td>
+            
+          </tr>
 
-<% delta = stat %>
-<%  end %>
-</table>
+        <% delta = stat %>
+        <%  end %>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
 <% end %>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

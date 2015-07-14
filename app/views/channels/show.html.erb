@@ -12,7 +12,12 @@
     </div>
     <div class="media-body">
       <h4 class="media-heading"><%= @channel.title %></h4>
-      <%= @channel.description %>
+      <p><%= @channel.description %></p>
+        <ul class="list-unstyled">
+          <li>Videos  <%= number_with_delimiter(@channel.video_count) %></li>
+          <li>Views  <%= number_with_delimiter(@channel.view_count) %></li>
+          <li>Subscribers  <%= number_with_delimiter(@channel.subscriber_count) %></li>
+        </ul>
     </div>
   </div>         
 <% if @channel_stats %>
@@ -31,29 +36,45 @@
 <%= line_chart @channel_stats.group_by_day(:created_at).maximum("view_count") %>
 <h4>Subscriber <small>구독자 통계</small></h4>
 <%= line_chart @channel_stats.group_by_day(:created_at).maximum("subscriber_count") %>
-<h4>Detail <small>통계 상세</small></h4>
-<table class="table">
-  <tr>
-    <th>Date</th>
-    <th style="text-align:right; padding-right:10px; ">Video #</th>
-    <th style="text-align:right; padding-right:10px; ">View #</th>
-    <th style="text-align:right; padding-right:10px; ">Comments #</th>
-    <th style="text-align:right; padding-right:10px; ">Subscriber #</th>
-  </tr>
 
-<% delta = @channel_stats.first %>
-<% @channel_stats.each_with_index do |stat, i| %>
 
-  <tr >
-    <td><%= stat.created_at.getlocal.strftime("%F %R") %></td>
-    <td style="text-align:right; padding-right:10px; "><%= link_to number_with_delimiter(stat.video_count), channel_videos_path(@channel.id) %><%= num_diff(stat.video_count, delta.video_count) if i != 0  %></td>
-    <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(stat.view_count) %><%= num_diff(stat.view_count, delta.view_count) if i != 0  %></td>
-    <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(stat.comment_count) %><%= num_diff(stat.comment_count, delta.comment_count) if i != 0  %></td>
-    <td  style="text-align:right; padding-right:10px; "><%= number_with_delimiter(stat.subscriber_count) %><%= num_diff(stat.subscriber_count, delta.subscriber_count) if i != 0  %></td>
-  </tr>
-<% delta = stat %>
-<%  end %>
-</table>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Detail <small>통계 상세</small>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <table class="table">
+          <tr>
+            <th>Date</th>
+            <th style="text-align:right; padding-right:10px; ">Video #</th>
+            <th style="text-align:right; padding-right:10px; ">View #</th>
+            <th style="text-align:right; padding-right:10px; ">Comments #</th>
+            <th style="text-align:right; padding-right:10px; ">Subscriber #</th>
+          </tr>
+
+        <% delta = @channel_stats.first %>
+        <% @channel_stats.each_with_index do |stat, i| %>
+
+          <tr >
+            <td><%= stat.created_at.getlocal.strftime("%F %R") %></td>
+            <td style="text-align:right; padding-right:10px; "><%= link_to number_with_delimiter(stat.video_count), channel_videos_path(@channel.id) %><%= num_diff(stat.video_count, delta.video_count) if i != 0  %></td>
+            <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(stat.view_count) %><%= num_diff(stat.view_count, delta.view_count) if i != 0  %></td>
+            <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(stat.comment_count) %><%= num_diff(stat.comment_count, delta.comment_count) if i != 0  %></td>
+            <td  style="text-align:right; padding-right:10px; "><%= number_with_delimiter(stat.subscriber_count) %><%= num_diff(stat.subscriber_count, delta.subscriber_count) if i != 0  %></td>
+          </tr>
+        <% delta = stat %>
+        <%  end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 <% end %>
 <h3>Playlist </h3>
 <% if @playlists %>
