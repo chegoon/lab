@@ -76,9 +76,9 @@ class VideosController < ApplicationController
       params.require(:video).permit(:v_id, :title, :description, :published_at, :thumbnail_url, :channel_id)
     end
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
   end
   def sort_column
-    Video.column_names.include?(params[:sort]) ? params[:sort] : "id"
+    Video.column_names.include?(params[:sort]) ? params[:sort] : "published_at"
   end
 end
