@@ -4,7 +4,7 @@ class ChannelsController < ApplicationController
   # GET /channels
   # GET /channels.json
   def index
-    @channels = Channel.order("subscriber_count DESC")
+    @channels = Channel.order("subscriber_count DESC").page(params[:page])
     #ChannelsWorker.perform_async
   end
 
