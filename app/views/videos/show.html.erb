@@ -12,6 +12,7 @@
       <h4 class="media-heading">비디오 정보</h4>
       <p><%= @video.description %></p>
       <ul class="list-unstyled">
+        <li>Upload  <%= @video.published_at.to_date %></li>
         <li>Views  <%= number_with_delimiter(@video.video_statistics.last.view_count) %></li>
         <li>Likes  <%= number_with_delimiter(@video.video_statistics.last.like_count) %></li>
         <li>Dislikes  <%= number_with_delimiter(@video.video_statistics.last.dislike_count) %></li>
