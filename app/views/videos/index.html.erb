@@ -10,9 +10,15 @@
       <th>No.</th>
       <th>Creator</th>
       <th>Video</th>
-      <th style="text-align:right; padding-right:10px; ">Views</th>
-      <th style="text-align:right; padding-right:10px; ">Likes</th>
-      <th style="text-align:right; padding-right:10px; ">Comments</th>
+      <!--
+      <th style="text-align:right; padding-right:10px; "><%= link_to "Views", videos_path, :sort => "view_count" %></th>
+      <th style="text-align:right; padding-right:10px; "><%= link_to "Likes", :sort => "like_count" %></th>
+      <th style="text-align:right; padding-right:10px; "><%=  link_to "Comments", :sort => "comment_count" %></th>
+      -->
+      <th style="text-align:right; padding-right:10px; "><%= sortable "published_at", "Uploaded" %></th>
+      <th style="text-align:right; padding-right:10px; "><%= sortable "view_count", "Views" %></th>
+      <th style="text-align:right; padding-right:10px; "><%= sortable "like_count", "Likes" %></th>
+      <th style="text-align:right; padding-right:10px; "><%= sortable "comment_count", "Comments" %></th>
       <!-- <th><%=t '.actions', :default => t("helpers.actions") %></th> -->
     </tr>
   </thead>
@@ -32,10 +38,11 @@
           <div class="media-body">
             <h4 class="media-heading"><%= v.title %></h4>
             <p><%= v.description %></p>
-            <div class="pull-right"><%= "Uploaded at #{v.published_at.getlocal.strftime("%F %R")}" if v.published_at %></div>
+            <!--<div class="pull-right"><%= "Uploaded at #{v.published_at.getlocal.strftime("%F %R")}" if v.published_at %></div>-->
           </div>
         </div>
       </td>
+      <td style="text-align:right; padding-right:10px; "><%= v.published_at.getlocal.strftime("%F %R") %></td>
       <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(v.video_statistics.last.view_count) %></td>
       <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(v.video_statistics.last.like_count) %></td>
       <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(v.video_statistics.last.comment_count) %></td>

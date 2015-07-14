@@ -1,10 +1,13 @@
 class VideosController < ApplicationController
   before_action :set_video, only: [:show, :edit, :update, :destroy]
 
+  helper_method :sort_column, :sort_direction
   # GET /videos
   # GET /videos.json
   def index
-    @videos = Video.order("published_at DESC").page(params[:page])
+    #@videos = Video.order("published_at DESC").page(params[:page])
+    @videos = Video.order(sort_column + ' ' + sort_direction).page(params[:page])
+    #@videos = Video.order(params[:sort]).page(params[:page])
   end
 
   # GET /videos/1
@@ -72,4 +75,10 @@ class VideosController < ApplicationController
     def video_params
       params.require(:video).permit(:v_id, :title, :description, :published_at, :thumbnail_url, :channel_id)
     end
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+  end
+  def sort_column
+    Video.column_names.include?(params[:sort]) ? params[:sort] : "id"
+  end
 end
