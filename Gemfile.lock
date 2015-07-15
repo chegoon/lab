@@ -47,6 +47,8 @@ GEM
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.10)
+    figaro (1.1.1)
+      thor (~> 0.14)
     groupdate (2.4.0)
       activesupport (>= 3)
     hashie (3.4.2)
@@ -188,6 +190,7 @@ PLATFORMS
 DEPENDENCIES
   chartkick
   coffee-rails (~> 4.0.0)
+  figaro
   groupdate
   jbuilder (~> 2.0)
   jquery-rails
