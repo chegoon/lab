@@ -21,7 +21,6 @@
     </div>
   </div>
 </nav>
-<%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) if user_signed_in? %>
 <div class="container">
   <ul class="nav nav-pills">
     <li role="presentation" <%= "class=active" if current_page?(root_url) %>><a href="/">Home</a></li>
