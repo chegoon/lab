@@ -1,6 +1,7 @@
 class VideosController < ApplicationController
   before_action :set_video, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  
   helper_method :sort_column, :sort_direction
   # GET /videos
   # GET /videos.json

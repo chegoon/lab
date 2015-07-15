@@ -1,6 +1,7 @@
 class ChannelsController < ApplicationController
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  
   helper_method :sort_column, :sort_direction
   # GET /channels
   # GET /channels.json
