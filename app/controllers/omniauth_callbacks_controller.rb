@@ -1,5 +1,9 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  
+   def all
+    raise request.env["omniauth.auth"].to_yaml
+  end
+  alias_method :google_oauth2, :all
+=begin  
   def google_oauth2
       # You need to implement the method below in your model (e.g. app/models/user.rb)
       @user = User.from_omniauth(request.env["omniauth.auth"])
@@ -12,4 +16,5 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_to new_user_registration_url
       end
   end
+=end  
 end
