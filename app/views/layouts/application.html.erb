@@ -16,11 +16,25 @@
       </a>
   -->
       <p class="navbar-text"><%= link_to "Beautymeets", root_path %></p>
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
     </div>
   </div>
 </nav>
+
+<div class="container">
+<% if notice %>
+<p class="notice"><%= notice %></p>
+<% end %>
+<% if alert %>
+<p class="alert"><%= alert %></p>
+<% end %>
+</div>
+<div class="container text-right">
+      <% if user_signed_in? %>
+        <%= current_user.email %><%= link_to ", Logout", destroy_user_session_path, :method => :delete %>
+      <% else %>
+        <%= link_to "Login", new_user_session_path %>
+      <% end %>
+</div>
 <div class="container">
   <ul class="nav nav-pills">
     <li role="presentation" <%= "class=active" if current_page?(root_url) %>><a href="/">Home</a></li>
@@ -28,6 +42,8 @@
     <li role="presentation" <%= "class=active" if current_page?('/videos') %>><a href="/videos">Video</a></li>
   </ul>
 </div>
+
+
 <div class="container">
 	<%= yield %>
 </div>
