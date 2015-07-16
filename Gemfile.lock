@@ -212,6 +212,7 @@ DEPENDENCIES
   libv8
   mysql2
   omniauth-google-oauth2
+  omniauth-oauth2
   passenger
   rails (= 4.1.6)
   rerun
