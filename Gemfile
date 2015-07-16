@@ -44,9 +44,7 @@ gem 'rerun'
 
 gem 'figaro'
 gem 'devise'
-gem 'omniauth'
-gem 'omniauth-oauth2'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2', '0.2.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
