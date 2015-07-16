@@ -211,6 +211,7 @@ DEPENDENCIES
   less-rails
   libv8
   mysql2
+  omniauth
   omniauth-google-oauth2
   omniauth-oauth2
   passenger
