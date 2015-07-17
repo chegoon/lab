@@ -13,7 +13,6 @@ def self.new_with_session(params, session)
     super
   end    
 end
-=begin
 def self.from_omniauth(auth)
   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
     user.provider = auth.provider
@@ -22,8 +21,7 @@ def self.from_omniauth(auth)
     user.name = auth.info.nickname
   end
 end
-=end
-
+=begin
 	def self.from_omniauth(auth)
 	    user = User.where(:email => auth.email).first
 
@@ -36,4 +34,5 @@ end
 	     end
 	    user
 	end
+=end
 end
