@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2]
+
+=begin
 def self.new_with_session(params, session)
   if session["devise.user_attributes"]
     new(session["devise.user_attributes"], without_protection: true) do |user|
@@ -13,6 +15,7 @@ def self.new_with_session(params, session)
     super
   end    
 end
+
 def self.from_omniauth(auth)
   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
     user.provider = auth.provider
@@ -21,7 +24,8 @@ def self.from_omniauth(auth)
     user.name = auth.info.nickname
   end
 end
-=begin
+=end
+
 	def self.from_omniauth(auth)
 	    user = User.where(:email => auth.email).first
 
@@ -34,5 +38,5 @@ end
 	     end
 	    user
 	end
-=end
+
 end
