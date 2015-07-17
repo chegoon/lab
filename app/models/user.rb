@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2]
 
-=begin
+
 def self.new_with_session(params, session)
   if session["devise.user_attributes"]
     new(session["devise.user_attributes"], without_protection: true) do |user|
@@ -21,11 +21,14 @@ def self.from_omniauth(auth)
     user.provider = auth.provider
     user.uid = auth.uid
     user.email = auth.email
-    user.name = auth.info.nickname
+    user.name = auth.info.name
   end
 end
-=end
 
+def password_required?
+  super && provider.blank?
+end
+=begin
 	def self.from_omniauth(auth)
 	    user = User.where(:email => auth.email).first
 
@@ -38,5 +41,5 @@ end
 	     end
 	    user
 	end
-
+=end
 end
