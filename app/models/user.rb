@@ -19,8 +19,9 @@ end
 
 def self.from_omniauth(auth)
 	puts "self from omniauth launched"
-	puts auth
+
   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+  	puts "user check #{user}"
     user.provider = auth.provider
     user.uid = auth.uid
     user.email = auth.email
