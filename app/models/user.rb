@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
 
 def self.new_with_session(params, session)
+	puts "self new with session launched"
   if session["devise.user_attributes"]
     new(session["devise.user_attributes"], without_protection: true) do |user|
       user.attributes = params
@@ -17,6 +18,7 @@ def self.new_with_session(params, session)
 end
 
 def self.from_omniauth(auth)
+	puts "self from omniauth launched"
   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
     user.provider = auth.provider
     user.uid = auth.uid
