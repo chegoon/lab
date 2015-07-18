@@ -6,6 +6,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect user, notice: "Signed in!"
     else
       puts "user persisted failed"
+      puts "#{user.attributes}"
       session["devise.user_attributes"] = user.attributes
       redirect_to new_user_registration_url
     end
