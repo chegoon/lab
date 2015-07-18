@@ -8,8 +8,9 @@ class User < ActiveRecord::Base
 def self.new_with_session(params, session)
 	puts "self new with session launched"
   if session["devise.user_attributes"]
+  	puts "user attributes saved"
     new(session["devise.user_attributes"], without_protection: true) do |user|
-    	puts "user attributes saved"
+
       user.attributes = params
       user.valid?
     end
