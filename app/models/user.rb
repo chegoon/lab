@@ -18,7 +18,7 @@ def self.new_with_session(params, session)
     super
   end    
 end
-
+=begin
 def self.from_omniauth(auth)
 	puts "self from omniauth launched"
 
@@ -30,11 +30,8 @@ def self.from_omniauth(auth)
     user.name = auth.info.name
   end
 end
+=end
 
-def password_required?
-  super && provider.blank?
-end
-=begin
 	def self.from_omniauth(auth)
 	    user = User.where(:email => auth.email, :provider => auth.provider, :uid => auth.uid).first
 
@@ -47,5 +44,9 @@ end
 	     end
 	    user
 	end
-=end
+
+def password_required?
+  super && provider.blank?
+end
+
 end
