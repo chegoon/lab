@@ -33,12 +33,12 @@ end
 =end
 
 	def self.from_omniauth(auth)
-	    user = User.where(:email => auth.email, :provider => auth.provider, :uid => auth.uid).first
+	    user = User.where(:provider => auth.provider, :uid => auth.uid).first
 
 	    #Uncomment the section below if you want users to be created if they don't exist
 	     unless user
 	         user = User.create(name: auth.info.name,
-	            email: auth.email,
+	            email: "Test@test.com",
 	            password: Devise.friendly_token[0,20]
 	         )
 	     end
