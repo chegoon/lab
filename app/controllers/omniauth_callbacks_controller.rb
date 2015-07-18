@@ -3,6 +3,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
    def all
     user = User.from_omniauth(request.env["omniauth.auth"])
     if user.persisted?
+      puts "signed in"
       flash.notice = "Signed in!"
       sign_in_and_redirect user
     else
@@ -25,7 +26,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
   end
 =end 
-  def configure_permitted_parameters
-     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :email, :password, :password_confirmation, :uid, :provider) }
-  end 
+    def configure_permitted_parameters
+       devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :email, :password, :password_confirmation, :uid, :provider) }
+    end 
 end
