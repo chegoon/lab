@@ -40,7 +40,7 @@ end
 	         user = User.create(name: auth.info.name,
 	            email: auth.email,
 	            password: Devise.friendly_token[0,20]
-	         ).permit!(:name, :uid, :provider)
+	         )
 	     end
 	    user
 	end
