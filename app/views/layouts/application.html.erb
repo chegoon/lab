@@ -8,35 +8,8 @@
   <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 </head>
 <body>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <!-- <a class="navbar-brand" href="/">
-        <img alt="Brand" src="...">
-      </a>
-  -->
-      <p class="navbar-text"><%= link_to "Beautymeets", root_path %></p>
-    </div>
-  </div>
-</nav>
 
-<div class="container text-right">
-      <% if user_signed_in? %>
-        <%= current_user.email %><%= link_to ", Logout", destroy_user_session_path, :method => :delete %>
-      <% else %>
-        <%= #link_to "Login", new_user_session_path 
-        %>
-        <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %>
-      <% end %>
-</div>
-<div class="container">
-  <ul class="nav nav-pills">
-    <li role="presentation" <%= "class=active" if current_page?(root_url) %>><a href="/">Home</a></li>
-    <li role="presentation" <%= "class=active" if current_page?('/channels') %>><a href="/channels">Channel</a></li>
-    <li role="presentation" <%= "class=active" if current_page?('/videos') %>><a href="/videos">Video</a></li>
-  </ul>
-</div>
-
+<%= render 'layouts/header' %>
 
 <div class="container">
   <%= render 'layouts/messages' %>
