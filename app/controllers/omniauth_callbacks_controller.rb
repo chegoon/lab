@@ -1,5 +1,6 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
    skip_before_filter  :verify_authenticity_token
+   protect_from_forgery :except => :create
    
    def all
     user = User.from_omniauth(request.env["omniauth.auth"])
