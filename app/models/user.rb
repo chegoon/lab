@@ -44,7 +44,6 @@ end
 	            password: Devise.friendly_token[0,20]
 	         )
 	     end
-	    puts "from_omniauth #{user.id}"
       user
 	end
 
