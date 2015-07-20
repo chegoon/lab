@@ -42,7 +42,8 @@ end
 	            password: Devise.friendly_token[0,20]
 	         )
 	     end
-	    user
+	    puts "from_omniauth #{user.id}"
+      user
 	end
 
 def password_required?
