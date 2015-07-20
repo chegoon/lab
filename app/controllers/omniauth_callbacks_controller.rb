@@ -1,12 +1,13 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
    skip_before_filter  :verify_authenticity_token
    protect_from_forgery :except => :create
-   
+
    def all
     user = User.from_omniauth(request.env["omniauth.auth"])
     if user.persisted?
       puts "signed in"
       flash.notice = "Signed in!"
+      session[:user_id] = user.id
       sign_in_and_redirect user
     else
       session["devise.user_attributes"] = user.attributes
