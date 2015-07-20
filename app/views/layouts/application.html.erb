@@ -20,14 +20,6 @@
   </div>
 </nav>
 
-<div class="container">
-<% if notice %>
-<p class="notice"><%= notice %></p>
-<% end %>
-<% if alert %>
-<p class="alert"><%= alert %></p>
-<% end %>
-</div>
 <div class="container text-right">
       <% if user_signed_in? %>
         <%= current_user.email %><%= link_to ", Logout", destroy_user_session_path, :method => :delete %>
@@ -47,7 +39,9 @@
 
 
 <div class="container">
+  <%= render 'layouts/messages' %>
 	<%= yield %>
+  <%= render 'layouts/footer' %>
 </div>
 
 </body>
