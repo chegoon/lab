@@ -39,6 +39,8 @@ end
 	     unless user
 	         user = User.create(name: auth.info.name,
 	            email: auth.info.email,
+              provider: auth.provider, 
+              uid: auth.uid,
 	            password: Devise.friendly_token[0,20]
 	         )
 	     end
