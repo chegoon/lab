@@ -110,10 +110,10 @@
             <h4 class="media-heading"><%= v.title %></h4>
             <%= v.description %>
             <ul class="list-unstyled">
-              <li>Uploaded  <%= @video.published_at.to_date %></li>
-              <li>Views  <%= number_with_delimiter(@video.view_count) %></li>
-              <li>Likes  <%= number_with_delimiter(@video.like_count) %></li>
-              <li>Comments  <%= number_with_delimiter(@video.comment_count) %>
+              <li>Uploaded  <%= v.published_at.to_date %></li>
+              <li>Views  <%= number_with_delimiter(v.view_count) %></li>
+              <li>Likes  <%= number_with_delimiter(v.like_count) %></li>
+              <li>Comments  <%= number_with_delimiter(v.comment_count) %>
             </ul>
           </div>
         </div>
@@ -134,10 +134,10 @@
             <h4 class="media-heading"><%= v.title %></h4>
             <%= v.description %>
             <ul class="list-unstyled">
-              <li>Uploaded  <%= @video.published_at.to_date %></li>
-              <li>Views  <%= number_with_delimiter(@video.view_count) %></li>
-              <li>Likes  <%= number_with_delimiter(@video.like_count) %></li>
-              <li>Comments  <%= number_with_delimiter(@video.comment_count) %>
+              <li>Uploaded  <%= v.published_at.to_date %></li>
+              <li>Views  <%= number_with_delimiter(v.view_count) %></li>
+              <li>Likes  <%= number_with_delimiter(v.like_count) %></li>
+              <li>Comments  <%= number_with_delimiter(v.comment_count) %>
             </ul>
           </div>
         </div>
