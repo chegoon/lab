@@ -8,7 +8,9 @@ class ChannelsController < ApplicationController
   def index
     #@channels = Channel.order("subscriber_count DESC").page(params[:page])
     @channels = Channel.order(sort_column + ' ' + sort_direction).page(params[:page])
-    #ChannelsWorker.perform_async
+    if params[:update_all] == 'true' 
+      ChannelsWorker.perform_async
+    end
   end
 
   # GET /channels/1
