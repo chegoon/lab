@@ -41,7 +41,6 @@ gem 'passenger'
 gem 'chartkick'
 gem 'groupdate'
 gem 'will_paginate-bootstrap'
-gem 'rerun'
 gem 'sinatra', :require => nil
 gem 'figaro'
 gem 'devise'
