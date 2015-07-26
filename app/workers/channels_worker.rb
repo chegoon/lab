@@ -4,7 +4,7 @@ class ChannelsWorker
 	sidekiq_options retry: false
 
 	def perform(channel_id = 0)
-		#puts "chan worker is performing"
+		puts "channel worker is performing"
 		channel = Channel.find(channel_id) if channel_id != 0
 		if (channel_id != 0) && channel
 			yt_ch = Yt::Channel.new id: channel.ch_id
@@ -20,7 +20,7 @@ class ChannelsWorker
 
 	private
 	def update_channel(ch, yt_ch)
-
+		puts "update_channel is called #{ch.title}"
         ch.update(title: yt_ch.title, description: yt_ch.description, published_at: yt_ch.published_at, thumbnail_url: yt_ch.thumbnail_url, video_count: yt_ch.video_count, view_count: yt_ch.view_count, comment_count: yt_ch.comment_count, subscriber_count: yt_ch.subscriber_count)
         ch.channel_statistics.create(video_count: yt_ch.video_count, view_count: yt_ch.view_count, comment_count: yt_ch.comment_count, subscriber_count: yt_ch.subscriber_count)
 
