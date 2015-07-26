@@ -21,7 +21,7 @@ class ChannelsWorker
 	private
 	def update_channel(ch, yt_ch)
 		puts "update_channel is called #{ch.title}"
-=begin		
+
         ch.update(title: yt_ch.title, description: yt_ch.description, published_at: yt_ch.published_at, thumbnail_url: yt_ch.thumbnail_url, video_count: yt_ch.video_count, view_count: yt_ch.view_count, comment_count: yt_ch.comment_count, subscriber_count: yt_ch.subscriber_count)
         ch.channel_statistics.create(video_count: yt_ch.video_count, view_count: yt_ch.view_count, comment_count: yt_ch.comment_count, subscriber_count: yt_ch.subscriber_count)
 
@@ -48,6 +48,6 @@ class ChannelsWorker
 				end
 			end
         end		        
-=end   
+
 	end
 end
