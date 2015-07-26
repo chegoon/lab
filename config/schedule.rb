@@ -26,5 +26,6 @@ job_type :runner, %q{ cd :path && PATH=:env_path:"$PATH" script/rails runner -e 
 #job_type :script, %q{ cd :path && PATH=:env_path:"$PATH" RAILS_ENV=:environment bundle exec script/:task :output }
 
 every 10.minutes do
+	puts "ChannelsWorker.perform_async is called"
 	runner "ChannelsWorker.perform_async"
 end
