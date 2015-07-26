@@ -35,7 +35,7 @@ gem 'therubyracer'#, '0.11.0beta8'
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
 gem 'whenever', :require => false
-#gem 'sidekiq'
+gem 'sidekiq'
 #gem 'rerun'
 #gem 'delayed_job_active_record'
 gem 'passenger'
