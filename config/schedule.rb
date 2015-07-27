@@ -25,7 +25,7 @@ set :env_path,    '"$HOME/.rbenv/shims":"$HOME/.rbenv/bin"'
 job_type :runner, %q{ cd :path && PATH=:env_path:"$PATH" script/rails runner -e :environment ':task' :output }
 #job_type :script, %q{ cd :path && PATH=:env_path:"$PATH" RAILS_ENV=:environment bundle exec script/:task :output }
 
-every 10.minutes do
+every 12.hours do
 	puts "ChannelsWorker.perform_async is called"
 	runner "ChannelsWorker.perform_async"
 end
