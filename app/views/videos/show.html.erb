@@ -1,5 +1,5 @@
 <%- model_class = Video -%>
-<p class="pull-right">At <%= Time.now.getlocal.strftime("%F %R") %>, refresh every 3hrs</p>
+<p class="pull-right">At <%= Time.now.getlocal.strftime("%F %R") %>, refresh every 12hrs</p>
 <div class="page-header">
   <h1><%= @video.title %> <small>by <%= link_to @video.channel.title, channel_path(@video.channel) %></small></h1>
 </div>
