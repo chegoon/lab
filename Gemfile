@@ -46,6 +46,8 @@ gem 'sinatra', :require => nil
 gem 'figaro'
 gem 'devise'
 gem 'omniauth-google-oauth2', '0.2.0'
+
+gem 'simple_form'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
