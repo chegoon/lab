@@ -6,7 +6,15 @@ class ChannelsWorker
 	def perform(channel_id = 0)
 		puts "channel worker is performing"
 		channel = Channel.find(channel_id) if channel_id != 0
+		# if parameter channel is username
 		if (channel_id != 0) && channel
+			url = URI.parse("https://www.googleapis.com/youtube/v3/channels?key=AIzaSyCZT4tgs-exq5My9CaiMmf4N6rQ2WFNzIA&forUsername=#{channel_id}&part=id")
+			req = Net::HTTP::Get.new(url.to_s)
+			res = Net::HTTP.start(url.host, url.port) {|http|
+				http.request(req)
+			}
+			puts res.body
+			#Channel.find(part: "id", username: channel_id)
 			yt_ch = Yt::Channel.new id: channel.ch_id
 			update_channel(channel, yt_ch)
 		else
@@ -41,7 +49,7 @@ class ChannelsWorker
         if yt_videos
 			yt_videos.each do |yt_v|
 				video = ch.videos.find_or_create_by(v_id: yt_v.id)	            
-				if video.update(title: yt_v.title, description: yt_v.description, published_at: yt_v.published_at, thumbnail_url: yt_v.thumbnail_url, view_count: yt_v.view_count, like_count: yt_v.like_count, dislike_count: yt_v.dislike_count, favorite_count: yt_v.favorite_count, comment_count: yt_v.comment_count)
+				if video.public? && video.update(title: yt_v.title, description: yt_v.description, published_at: yt_v.published_at, thumbnail_url: yt_v.thumbnail_url, view_count: yt_v.view_count, like_count: yt_v.like_count, dislike_count: yt_v.dislike_count, favorite_count: yt_v.favorite_count, comment_count: yt_v.comment_count)
 					v_content = VideoContentDetail.find_or_create_by(video_id: video.id)
 					v_content.update(duration: yt_v.duration, stereoscopic: yt_v.stereoscopic?, hd: yt_v.hd?, captioned: yt_v.captioned?, licensed: yt_v.licensed?, age_restricted: yt_v.age_restricted?)
 					video.video_statistics.create(view_count: yt_v.view_count, like_count: yt_v.like_count, dislike_count: yt_v.dislike_count, favorite_count: yt_v.favorite_count, comment_count: yt_v.comment_count)
