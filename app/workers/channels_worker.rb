@@ -5,15 +5,16 @@ class ChannelsWorker
 
 	def perform(channel_id = 0)
 		puts "channel worker is performing"
-		channel = Channel.find(channel_id) if channel_id != 0
-		# if parameter channel is username
-		if (channel_id != 0) && channel
-			url = URI.parse("https://www.googleapis.com/youtube/v3/channels?key=AIzaSyCZT4tgs-exq5My9CaiMmf4N6rQ2WFNzIA&forUsername=#{channel_id}&part=id")
+		url = URI.parse("https://www.googleapis.com/youtube/v3/channels?key=AIzaSyCZT4tgs-exq5My9CaiMmf4N6rQ2WFNzIA&forUsername=#{channel_id}&part=id")
 			req = Net::HTTP::Get.new(url.to_s)
 			res = Net::HTTP.start(url.host, url.port) {|http|
 				http.request(req)
 			}
 			puts res.body
+		channel = Channel.find(channel_id) if channel_id != 0
+		# if parameter channel is username
+		if (channel_id != 0) && channel
+			
 			#Channel.find(part: "id", username: channel_id)
 			yt_ch = Yt::Channel.new id: channel.ch_id
 			update_channel(channel, yt_ch)
