@@ -33,6 +33,14 @@ class ChannelsController < ApplicationController
   # POST /channels
   # POST /channels.json
   def create
+    if channel_params.permit(:ch_id)
+      url = URI.parse("https://www.googleapis.com/youtube/v3/channels?key=AIzaSyCZT4tgs-exq5My9CaiMmf4N6rQ2WFNzIA&forUsername=kyungsunxoxo&part=id")
+      req = Net::HTTP::Get.new(url.to_s)
+      res = Net::HTTP.start(url.host, url.port) {|http|
+        http.request(req)
+      }
+      puts res.body
+    end
     @channel = Channel.new(channel_params)
 
     respond_to do |format|
