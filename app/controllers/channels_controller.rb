@@ -1,4 +1,6 @@
 class ChannelsController < ApplicationController
+  include HTTParty
+
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
   #before_action :authenticate_user!
 
@@ -34,12 +36,17 @@ class ChannelsController < ApplicationController
   # POST /channels.json
   def create
     if channel_params.permit(:ch_id)
+      response = HTTParty.post("https://www.googleapis.com/youtube/v3/channels?key=AIzaSyCZT4tgs-exq5My9CaiMmf4N6rQ2WFNzIA&forUsername=kyungsunxoxo&part=id")
+      puts response.body, response.code, response.message, response.headers.inspect
+
+=begin      
       url = URI.parse("https://www.googleapis.com/youtube/v3/channels?key=AIzaSyCZT4tgs-exq5My9CaiMmf4N6rQ2WFNzIA&forUsername=kyungsunxoxo&part=id")
       req = Net::HTTP::Get.new(url.to_s)
       res = Net::HTTP.start(url.host, url.port) {|http|
         http.request(req)
       }
       puts res.body
+=end      
     end
     @channel = Channel.new(channel_params)
 
