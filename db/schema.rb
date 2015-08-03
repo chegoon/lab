@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150717124135) do
+ActiveRecord::Schema.define(version: 20150803185733) do
 
   create_table "channel_statistics", force: true do |t|
     t.integer  "channel_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150717124135) do
     t.integer  "subscriber_count"
     t.integer  "comment_count"
     t.boolean  "joined"
+    t.string   "username"
   end
 
   create_table "playlist_items", force: true do |t|

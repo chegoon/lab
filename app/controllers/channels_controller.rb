@@ -35,9 +35,13 @@ class ChannelsController < ApplicationController
   # POST /channels
   # POST /channels.json
   def create
-    if channel_params.permit(:ch_id)
-      response = HTTParty.get("https://www.googleapis.com/youtube/v3/channels?key=AIzaSyCZT4tgs-exq5My9CaiMmf4N6rQ2WFNzIA&forUsername=kyungsunxoxo&part=id")
-      puts response.body, response.code, response.message, response.headers.inspect
+    username = params[:channel][:username]
+
+    if username
+      response = HTTParty.get("https://www.googleapis.com/youtube/v3/channels?key=AIzaSyCZT4tgs-exq5My9CaiMmf4N6rQ2WFNzIA&forUsername=#{username.to_s}&part=id")
+      #channel_params.permit(:ch_id) = JSON.parse(response.body)["items"][0]["id"]
+      #puts "channel_id #{channel_params.permit(:ch_id)}"
+      @channel = Channel.new(channel_params.merge(ch_id: JSON.parse(response.body)["items"][0]["id"] ))
 
 =begin      
       url = URI.parse("https://www.googleapis.com/youtube/v3/channels?key=AIzaSyCZT4tgs-exq5My9CaiMmf4N6rQ2WFNzIA&forUsername=kyungsunxoxo&part=id")
@@ -46,9 +50,11 @@ class ChannelsController < ApplicationController
         http.request(req)
       }
       puts res.body
-=end      
+=end   
+    else   
+      @channel = Channel.new(channel_params)
     end
-    @channel = Channel.new(channel_params)
+    
 
     respond_to do |format|
       if @channel.save
@@ -107,7 +113,7 @@ class ChannelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def channel_params
-      params.require(:channel).permit(:ch_id, :title, :description, :published_at, :thumbnail_url, :video_count, :view_count, :subscriber_count, :comment_count, :joined)
+      params.require(:channel).permit(:ch_id, :username, :title, :description, :published_at, :thumbnail_url, :video_count, :view_count, :subscriber_count, :comment_count, :joined)
     end
     def sort_direction
     %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
