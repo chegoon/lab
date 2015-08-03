@@ -36,7 +36,7 @@ class ChannelsController < ApplicationController
   # POST /channels.json
   def create
     if channel_params.permit(:ch_id)
-      response = HTTParty.post("https://www.googleapis.com/youtube/v3/channels?key=AIzaSyCZT4tgs-exq5My9CaiMmf4N6rQ2WFNzIA&forUsername=kyungsunxoxo&part=id")
+      response = HTTParty.get("https://www.googleapis.com/youtube/v3/channels?key=AIzaSyCZT4tgs-exq5My9CaiMmf4N6rQ2WFNzIA&forUsername=kyungsunxoxo&part=id")
       puts response.body, response.code, response.message, response.headers.inspect
 
 =begin      
