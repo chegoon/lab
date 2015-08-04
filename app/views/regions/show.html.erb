@@ -1,0 +1,7 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @region.name %> <small><%= @region.code %></small></h1>
+
+<%= render partial: 'channels/channels'  %>
+<%= link_to 'Edit', edit_region_path(@region) %> |
+<%= link_to 'Back', regions_path %>
