@@ -18,6 +18,7 @@
           <li>Videos  <%= number_with_delimiter(@channel.video_count) %></li>
           <li>Views  <%= number_with_delimiter(@channel.view_count) %></li>
           <li>Subscribers  <%= number_with_delimiter(@channel.subscriber_count) %></li>
+          <li>주요 국가  <% @channel.regions.each do |r| %><%=  r.name %><% end %></li>
         </ul>
     </div>
   </div>         

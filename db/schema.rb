@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803185733) do
+ActiveRecord::Schema.define(version: 20150803193919) do
 
   create_table "channel_statistics", force: true do |t|
     t.integer  "channel_id"
@@ -71,6 +71,23 @@ ActiveRecord::Schema.define(version: 20150803185733) do
   end
 
   add_index "playlists", ["channel_id"], name: "index_playlists_on_channel_id", using: :btree
+
+  create_table "popularities", force: true do |t|
+    t.integer  "region_id"
+    t.integer  "channel_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "popularities", ["channel_id"], name: "index_popularities_on_channel_id", using: :btree
+  add_index "popularities", ["region_id"], name: "index_popularities_on_region_id", using: :btree
+
+  create_table "regions", force: true do |t|
+    t.string   "code"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  limit: 191, default: ""

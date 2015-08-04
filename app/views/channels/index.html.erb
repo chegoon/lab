@@ -15,6 +15,7 @@
       <th style="text-align:right; padding-right:10px; ">Views</th>
       <th style="text-align:right; padding-right:10px; ">Comments</th>
 -->
+      <th >Regions</th>
       <th style="text-align:right; padding-right:10px; "><%= sortable "video_count", "Videos" %></th>
       <th style="text-align:right; padding-right:10px; "><%= sortable "subscriber_count", "Subscribers" %></th>
       <th style="text-align:right; padding-right:10px; "><%= sortable "view_count", "Views" %></th>
@@ -41,6 +42,7 @@
           </div>
         </div>
       </td>
+      <td><% channel.regions.each do |r| %><%= "#{r.name} " %><% end %></td>
       <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.video_count) if channel.video_count %><%= num_diff(channel.video_count, delta.video_count) if delta %></td>
       <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.subscriber_count) if channel.subscriber_count %><%= num_diff(channel.subscriber_count, delta.subscriber_count) if delta %></td>
       <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.view_count) if channel.view_count %><%= num_diff(channel.view_count, delta.view_count) if delta %></td>
