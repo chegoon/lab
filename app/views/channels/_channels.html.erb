@@ -44,7 +44,7 @@
       <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.video_count) if channel.video_count %><%= num_diff(channel.video_count, delta.video_count) if delta %></td>
       <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.subscriber_count) if channel.subscriber_count %><%= num_diff(channel.subscriber_count, delta.subscriber_count) if delta %></td>
       <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.view_count) if channel.view_count %><%= num_diff(channel.view_count, delta.view_count) if delta %></td>
-      <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.comment_count) if channel.comment_count %><%= num_diff(channel.comment_count, delta.comment_count) if delta %></td>
+      <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(channel.comment_count) if channel.comment_count %><%= num_diff(channel.comment_count, delta.comment_count) if delta %> <%= link_to 'Destroy', channel, method: :delete, data: { confirm: 'Are you sure?' } if user_signed_in? && current_user.email.include?("jwchae") %></td>
     </tr>
     <% end %>
   </tbody>
