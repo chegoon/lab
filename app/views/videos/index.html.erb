@@ -15,6 +15,7 @@
       <th style="text-align:right; padding-right:10px; "><%= link_to "Likes", :sort => "like_count" %></th>
       <th style="text-align:right; padding-right:10px; "><%=  link_to "Comments", :sort => "comment_count" %></th>
       -->
+      <th >Region</th>
       <th style="text-align:right; padding-right:10px; "><%= sortable "published_at", "Uploaded" %></th>
       <th style="text-align:right; padding-right:10px; "><%= sortable "view_count", "Views" %></th>
       <th style="text-align:right; padding-right:10px; "><%= sortable "like_count", "Likes" %></th>
@@ -27,7 +28,9 @@
     <% delta = v.video_statistics.offset(1).last %>
     <tr  onClick=document.location=<%= "'#{video_path(v)}'" %>; style="cursor: pointer;">
       <td><%= (@videos.current_page - 1) * @videos.per_page + i + 1 %></td>
-      <td><%= image_tag(v.channel.thumbnail_url, :class => "media-object", :style => "width:64px; height: 64px;") %></td>
+      <td><%= image_tag(v.channel.thumbnail_url, :class => "media-object", :style => "width:40px; height: 40px;") %>
+        <%= v.channel.title %>
+      </td>
       <td >
         <div class="media">
           <div class="media-left pull-left">
@@ -42,6 +45,7 @@
           </div>
         </div>
       </td>
+      <td><% v.channel.regions.each do |r| %> <%= "#{r.name} " %> <% end %></td>
       <td style="text-align:right; padding-right:10px; "><%= v.published_at.getlocal.strftime("%F %R") %></td>
       <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(v.view_count) %></td>
       <td style="text-align:right; padding-right:10px; "><%= number_with_delimiter(v.like_count) %></td>
