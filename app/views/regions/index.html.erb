@@ -6,7 +6,7 @@
       <th >Region</th>
       <th style="text-align:right; padding-right:10px; ">Channels</th>
       <th style="text-align:right; padding-right:10px; ">Videos</th>
-      <th style="text-align:right; padding-right:10px; ">Videos</th>
+      <th style="text-align:right; padding-right:10px; ">Subscribers</th>
     </tr>
   </thead>
 
@@ -18,7 +18,7 @@
         <td style="text-align:right; padding-right:10px; ">
           <% total_videos = 0 %>
           <% region.channels.each do |ch| %>
-            <% total_videos = total_videos + ch.videos.count %>
+            <% total_videos = total_videos + ch.video_count if ch.video_count.present? %>
           <% end %>
           <%= number_with_delimiter(total_videos) %>
         </td>
@@ -26,7 +26,7 @@
           <% total_subscribers = 0 %>
           <% region.channels.each do |ch| %>
 
-            <% total_subscribers = total_subscribers + ch.subscriber_count %>
+            <% total_subscribers = total_subscribers + ch.subscriber_count if ch.subscriber_count.present? %>
           <% end %>
           <%= number_with_delimiter(total_subscribers) %>
         </td>
