@@ -37,7 +37,7 @@ class ChannelsController < ApplicationController
   def create
     username = params[:channel][:username]
 
-    if username
+    if username.present?
       response = HTTParty.get("https://www.googleapis.com/youtube/v3/channels?key=AIzaSyCZT4tgs-exq5My9CaiMmf4N6rQ2WFNzIA&forUsername=#{username.to_s}&part=id")
       #channel_params.permit(:ch_id) = JSON.parse(response.body)["items"][0]["id"]
       #puts "channel_id #{channel_params.permit(:ch_id)}"
@@ -53,6 +53,7 @@ class ChannelsController < ApplicationController
 =end   
     else   
       @channel = Channel.new(channel_params)
+
     end
     
 
