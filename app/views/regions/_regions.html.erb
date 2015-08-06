@@ -14,35 +14,24 @@
       <tr>
         <td><%= link_to "#{region.name} (#{region.code})", region %></td>
         <td style="text-align:right; padding-right:10px; ">
-          <% delta = 0 %>
-          <% region.channels.each_with_index do |ch, j| %>
-            <% delta = delta + (ch.channel_statistics.offset(1).last.present? ? 1 : 0) %>
-          <% end %>
-          <%= number_with_delimiter(region.channels.count) %><%= num_diff(region.channels.count, delta) if delta != 0 %>
+          <%= number_with_delimiter(region.channels.count) %>
         </td>
         <td style="text-align:right; padding-right:10px; ">
           <% total_videos = 0 %>
           <% region.channels.each do |ch| %>
             <% total_videos = total_videos + ch.video_count if ch.video_count.present? %>
 
-            <% delta = 0 %>
-            <% region.channels.each_with_index do |ch, j| %>
-              <% delta = delta + ch.channel_statistics.offset(1).last.video_count if ch.channel_statistics.offset(1).last %>
-            <% end %>
           <% end %>
-          <%= number_with_delimiter(total_videos) %><%= num_diff(total_videos, delta) if delta != 0 %>
+          <%= number_with_delimiter(total_videos) %>
         </td>
         <td style="text-align:right; padding-right:10px; ">
           <% total_subscribers = 0 %>
           <% region.channels.each do |ch| %>
 
             <% total_subscribers = total_subscribers + ch.subscriber_count if ch.subscriber_count.present? %>
-            <% delta = 0 %>
-            <% region.channels.each_with_index do |ch, j| %>
-              <% delta = delta + ch.channel_statistics.offset(1).last.subscriber_count if ch.channel_statistics.offset(1).last %>
-            <% end %>
+            
           <% end %>
-          <%= number_with_delimiter(total_subscribers) %><%= num_diff(total_subscribers, delta) if delta != 0 %>
+          <%= number_with_delimiter(total_subscribers) %>
         </td>
       </tr>
     <% end %>
