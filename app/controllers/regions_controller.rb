@@ -6,7 +6,7 @@ class RegionsController < ApplicationController
     @regions = Region.all
     #@regions = Region.order(sort_column + ' ' + sort_direction)
     #respond_with(@regions)
-    #@RegionsWorker.perform_async
+    RegionsWorker.perform_async
   end
 
   def show
