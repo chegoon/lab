@@ -21,7 +21,7 @@ class RegionsWorker
 
 	private
 	def update_region(r)
-		puts "update_region is called #{r}"
+		puts "update_region is called #{r.id}"
 
 		region = Region.find(r.id)
 		channels = region.channels
