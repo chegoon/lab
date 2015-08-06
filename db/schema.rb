@@ -101,8 +101,8 @@ ActiveRecord::Schema.define(version: 20150806143219) do
     t.integer  "channel_count"
     t.integer  "view_count"
     t.integer  "video_count"
-    t.integer  "subsicriber_count"
-    t.integer  "comment_integer"
+    t.integer  "subscriber_count"
+    t.integer  "comment_count"
   end
 
   create_table "users", force: true do |t|
