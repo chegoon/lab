@@ -2,7 +2,7 @@
 
 <h1><%= @region.name %> <small><%= @region.code %></small></h1>
 
-<%= pie_chart @region.channels.group(:title).count %>
+<%= pie_chart @region.channels.group(:title).maximum("subscriber_count") %>
 
 <%= render partial: 'channels/channels'  %>
 <%= link_to 'Edit', edit_region_path(@region) %> |
