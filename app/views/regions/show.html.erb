@@ -2,7 +2,12 @@
 
 <h1><%= @region.name %> <small><%= @region.code %></small></h1>
 
-<%= pie_chart @region.channels.group(:title).maximum("subscriber_count") %>
+<h3>Stats <small>Top 10 지역 통계</small></h3>
+
+<h4>Subscribers <small>구독자 통계</small></h4>
+<%= pie_chart @region.channels.order("subscriber_count DESC").first(10).group(:title).maximum("subscriber_count") %>
+<h4>Videos <small>비디오 조회 통계</small></h4>
+<%= pie_chart @region.channels.order("view_count DESC").first(10).group(:title).maximum("view_count") %>
 
 <%= render partial: 'channels/channels'  %>
 <%= link_to 'Edit', edit_region_path(@region) %> |
