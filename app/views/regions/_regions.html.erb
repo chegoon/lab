@@ -27,7 +27,7 @@
 
             <% delta = 0 %>
             <% region.channels.each_with_index do |ch, j| %>
-              <% delta = delta + ch.channel_statistics.offset(1).last.video_count %>
+              <% delta = delta + ch.channel_statistics.offset(1).last.video_count if ch.channel_statistics.offset(1).last %>
             <% end %>
           <% end %>
           <%= number_with_delimiter(total_videos) %><%= num_diff(total_videos, delta) if delta != 0 %>
@@ -39,7 +39,7 @@
             <% total_subscribers = total_subscribers + ch.subscriber_count if ch.subscriber_count.present? %>
             <% delta = 0 %>
             <% region.channels.each_with_index do |ch, j| %>
-              <% delta = delta + ch.channel_statistics.offset(1).last.subscriber_count %>
+              <% delta = delta + ch.channel_statistics.offset(1).last.subscriber_count if ch.channel_statistics.offset(1).last %>
             <% end %>
           <% end %>
           <%= number_with_delimiter(total_subscribers) %><%= num_diff(total_subscribers, delta) if delta != 0 %>
