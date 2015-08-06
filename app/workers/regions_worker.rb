@@ -26,10 +26,10 @@ class RegionsWorker
 		region = Region.find(r.id)
 		channels = region.channels
 		
-		region.update(channel_count: channel.count, video_count: channels.pluck(:video_count).reduce(:+), view_count: channels.pluck(:view_count).reduce(:+), subscriber_count: channels.pluck(:subscriber_count).reduce(:+), comment_count: channels.pluck(:comment_count).reduce(:+))
+		region.update(channel_count: channels.count, video_count: channels.pluck(:video_count).reduce(:+), view_count: channels.pluck(:view_count).reduce(:+), subscriber_count: channels.pluck(:subscriber_count).reduce(:+), comment_count: channels.pluck(:comment_count).reduce(:+))
 
 		stat = region.region_statistics.create
-		stat.update(channel_count: channel.count, video_count: channels.pluck(:video_count).reduce(:+), view_count: channels.pluck(:view_count).reduce(:+), comment_count: channels.pluck(:comment_count).reduce(:+), subscriber_count: channels.pluck(:subscriber_count).reduce(:+))
+		stat.update(channel_count: channels.count, video_count: channels.pluck(:video_count).reduce(:+), view_count: channels.pluck(:view_count).reduce(:+), comment_count: channels.pluck(:comment_count).reduce(:+), subscriber_count: channels.pluck(:subscriber_count).reduce(:+))
 		
 	end
 end
