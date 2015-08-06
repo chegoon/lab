@@ -18,7 +18,17 @@ class ChannelsController < ApplicationController
   # GET /channels/1
   # GET /channels/1.json
   def show
+    #@stats = Array.new
     @channel_stats = @channel.channel_statistics
+    #@stats << @channel_stats
+=begin    
+    @channel.regions.each do |r|
+      avg_ch = {title: r.name, created_at: r.channels.collect(&:created_at), video_count: r.channels.collect(&:video_count)}
+      @stats << avg_ch
+      puts "avg_ch : #{avg_ch}"
+    end
+    puts "stats : #{@stats}"
+=end
     @playlists = @channel.playlists
     @videos = @channel.videos
   end

@@ -18,7 +18,9 @@
           <li>Videos  <%= number_with_delimiter(@channel.video_count) %></li>
           <li>Views  <%= number_with_delimiter(@channel.view_count) %></li>
           <li>Subscribers  <%= number_with_delimiter(@channel.subscriber_count) %></li>
-          <li>주요 국가  <% @channel.regions.each do |r| %><%=  r.name %><% end %></li>
+          <li>Views Per Video <%= number_with_delimiter(@channel.view_count / @channel.video_count) %></li>
+          <li>Subsribers Per Video <%= number_with_delimiter(@channel.subscriber_count / @channel.video_count) %></li>
+          <li>주요 활동 국가  <% @channel.regions.each do |r| %><%=  r.name %><% end %></li>
         </ul>
     </div>
   </div>         
@@ -34,10 +36,16 @@
 <h3>Stats <small>채널 통계</small></h3>
 <h4>Videos <small>비디오 통계</small></h4>
 <%= line_chart @channel_stats.group_by_day(:created_at).maximum("video_count") %>
+<%= #line_chart @stats.map { |stat| {name: stat.title, data: stat.group_by_day(:created_at).maximum("video_count") }} 
+%>
 <h4>Views <small>조회수 통계</small></h4>
 <%= line_chart @channel_stats.group_by_day(:created_at).maximum("view_count") %>
+<h4><small>평균 조회수 통계(Views per video)</small></h4>
+<%= line_chart @channel_stats.group_by_day(:created_at).maximum("view_count / video_count") %>
 <h4>Subscriber <small>구독자 통계</small></h4>
 <%= line_chart @channel_stats.group_by_day(:created_at).maximum("subscriber_count") %>
+<h4><small>구독 유치 통계(Subscribers per video)</small></h4>
+<%= line_chart @channel_stats.group_by_day(:created_at).maximum("subscriber_count / video_count") %>
 
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
