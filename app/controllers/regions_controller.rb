@@ -4,6 +4,7 @@ class RegionsController < ApplicationController
   helper_method :sort_column, :sort_direction
   def index
     @regions = Region.all
+    #@regions = Region.order(sort_column + ' ' + sort_direction)
     #respond_with(@regions)
   end
 
