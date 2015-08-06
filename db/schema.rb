@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803193919) do
+ActiveRecord::Schema.define(version: 20150806143219) do
 
   create_table "channel_statistics", force: true do |t|
     t.integer  "channel_id"
@@ -82,11 +82,27 @@ ActiveRecord::Schema.define(version: 20150803193919) do
   add_index "popularities", ["channel_id"], name: "index_popularities_on_channel_id", using: :btree
   add_index "popularities", ["region_id"], name: "index_popularities_on_region_id", using: :btree
 
+  create_table "region_statistics", force: true do |t|
+    t.integer  "region_id"
+    t.integer  "channel_count"
+    t.integer  "view_count"
+    t.integer  "video_count"
+    t.integer  "subscriber_count"
+    t.integer  "comment_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "regions", force: true do |t|
     t.string   "code"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "channel_count"
+    t.integer  "view_count"
+    t.integer  "video_count"
+    t.integer  "subsicriber_count"
+    t.integer  "comment_integer"
   end
 
   create_table "users", force: true do |t|

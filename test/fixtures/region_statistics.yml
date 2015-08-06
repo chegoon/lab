@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  region: 
+  view_count: 1
+  video_count: 1
+  subscriber_count: 1
+  comment_count: 1
+
+two:
+  region: 
+  view_count: 1
+  video_count: 1
+  subscriber_count: 1
+  comment_count: 1

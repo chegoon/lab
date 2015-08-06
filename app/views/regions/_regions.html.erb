@@ -10,11 +10,12 @@
 
   <tbody>
     <% @regions.each_with_index do |region, i| %>
+    <% delta = region.region_statistics.offset(1).last %>
       
       <tr>
         <td><%= link_to "#{region.name} (#{region.code})", region %></td>
         <td style="text-align:right; padding-right:10px; ">
-          <%= number_with_delimiter(region.channels.count) %>
+          <%= number_with_delimiter(region.channels.count) %><%= num_diff(region.channel_count, delta.channel_count) if delta %>
         </td>
         <td style="text-align:right; padding-right:10px; ">
           <% total_videos = 0 %>
@@ -22,7 +23,7 @@
             <% total_videos = total_videos + ch.video_count if ch.video_count.present? %>
 
           <% end %>
-          <%= number_with_delimiter(total_videos) %>
+          <%= number_with_delimiter(total_videos) %><%= num_diff(region.video_count, delta.video_count) if delta %>
         </td>
         <td style="text-align:right; padding-right:10px; ">
           <% total_subscribers = 0 %>
@@ -31,7 +32,7 @@
             <% total_subscribers = total_subscribers + ch.subscriber_count if ch.subscriber_count.present? %>
             
           <% end %>
-          <%= number_with_delimiter(total_subscribers) %>
+          <%= number_with_delimiter(total_subscribers) %><%= num_diff(region.subscriber_count, delta.subscriber_count) if delta %>
         </td>
       </tr>
     <% end %>
