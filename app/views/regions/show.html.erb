@@ -5,9 +5,9 @@
 <h3>Stats <small>Top 10 지역 통계</small></h3>
 
 <h4>Subscribers <small>구독자 통계</small></h4>
-<%= pie_chart @region.channels.order("subscriber_count DESC").group(:title).first(10).maximum("subscriber_count") %>
+<%= pie_chart @region.channels.order("subscriber_count DESC").group(:title).maximum("subscriber_count").first(10) %>
 <h4>Videos <small>비디오 조회 통계</small></h4>
-<%= pie_chart @region.channels.order("view_count DESC").group(:title).first(10).maximum("view_count") %>
+<%= pie_chart @region.channels.order("view_count DESC").group(:title).maximum("view_count").first(10) %>
 
 <%= render partial: 'channels/channels'  %>
 <%= link_to 'Edit', edit_region_path(@region) %> |
