@@ -36,10 +36,9 @@
 -->
 <h3>Stats <small>Video 통계</small></h3>
 <h4>Views <small>조회수 통계</small></h4>
-<%= line_chart [ {name: @video.title, data: @video_stats.group_by_day(:created_at).maximum("view_count")}, {name: "#{@video.channel.title} 평균", data: @video.channel.videos.group_by_day(:created_at).average("view_count")}] %>#, {name: "region 평균", data: @video.channel.regions.group_by_day(:created_at).average("view_count")}] %>
+<%= line_chart [ {name: @video.title, data: @video_stats.group_by_day(:created_at).maximum("view_count")}, {name: "#{@video.channel.title} 평균", data: @video.channel.videos.where(created_at: @video_stats.first.created_at..@video_stats.last.created_at).group_by_day(:created_at).average("view_count")}, {name: "#{@video.channel.regions.first.name} 평균", data: @video.channel.regions.first.channels.where(created_at: @video_stats.first.created_at..@video_stats.last.created_at).group_by_day("channels.created_at").average("view_count")}] %>
 <h4>Likes / Dislikes <small>좋아요, 싫어요 통계</small></h4>
-<%= pie_chart [ {name: "Likes", data: @video_stats.pluck(:like_count).reduce(:+)}, {name: "Disikes", data: @video_stats.pluck(:dislike_count).reduce(:+)} ] %>
-<%= pie_chart @video_stats.group(:like_count).count %>
+<%= pie_chart [ ["Likes", @video_stats.pluck(:like_count).reduce(:+)], ["Dislikes", @video_stats.pluck(:dislike_count).reduce(:+)] ] %>
 <%= line_chart [ {name: "Likes", data: @video_stats.group_by_day(:created_at).maximum("like_count")}, {name: "Dislikes", data: @video_stats.group_by_day(:created_at).maximum("dislike_count")} ] %>
 
 <!--
