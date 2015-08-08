@@ -1,5 +1,10 @@
 <%- model_class = Channel -%> 
 <h1>Dashboard</h1>
+	<p>
+		Total Videos : <%= number_with_delimiter(@channels.pluck(:video_count).compact.reduce(:+)) %><br/>
+		Total Subscribers : <%= number_with_delimiter(@channels.pluck(:subscriber_count).compact.reduce(:+)) %><br/>
+		Total Views : <%= number_with_delimiter(@channels.pluck(:view_count).compact.reduce(:+)) %>
+	</p>
     <div class="row">
     <% @channels.each_with_index do |channel, i| %>
     <% delta = channel.channel_statistics.offset(1).last %>
