@@ -1,1 +1,5 @@
+<p class="pull-right">At <%= Time.now.getlocal.strftime("%F %R") %>, refresh every 12hrs</p>
+<div class="page-header">
+  <h2>Creators Dashboard <small><%= number_with_delimiter(@channels.count) %> channels</small></h2>
+</div>
 <%= render partial: 'channels/channels'  %>
