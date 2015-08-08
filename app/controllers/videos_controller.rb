@@ -17,6 +17,15 @@ class VideosController < ApplicationController
     @video_stats = @video.video_statistics
     @ch_stats = @video.channel.channel_statistics
     @re_stats = @video.channel.regions.first.region_statistics
+    @re_videos = Video.where("channel_id IN (?)", @video.channel.regions.first.channels.map(&:id))
+=begin    
+    @re_videos = Array.new
+    @video.channel.regions.first.channels.each do |ch|
+      ch.videos.each do |v|
+        @re_videos.push(v)
+      end
+    end
+=end    
   end
 
   # GET /videos/new

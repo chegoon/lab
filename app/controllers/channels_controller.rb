@@ -20,6 +20,7 @@ class ChannelsController < ApplicationController
   def show
     #@stats = Array.new
     @channel_stats = @channel.channel_statistics
+    @re_stats = @channel.regions.first.region_statistics
     #@stats << @channel_stats
 =begin    
     @channel.regions.each do |r|
