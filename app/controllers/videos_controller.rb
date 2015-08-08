@@ -15,6 +15,8 @@ class VideosController < ApplicationController
   # GET /videos/1.json
   def show
     @video_stats = @video.video_statistics
+    @ch_stats = @video.channel.channel_statistics
+    @re_stats = @video.channel.regions.first.region_statistics
   end
 
   # GET /videos/new

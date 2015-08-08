@@ -33,19 +33,21 @@
               ] %>
 
 -->     
+<%= (@channel_stats.pluck(:video_count).min.to_f / 10).round * 10 %>
+<%= (@channel_stats.pluck(:video_count).max.to_f / 10).ceil * 10 %>
 <h3>Stats <small>채널 통계</small></h3>
 <h4>Videos <small>비디오 통계</small></h4>
-<%= line_chart @channel_stats.group_by_day(:created_at).maximum("video_count") %>
+<%= line_chart @channel_stats.group_by_day(:created_at).maximum("video_count"), min: (@channel_stats.pluck(:video_count).min.to_f / 10).round * 10 - 5, max: (@channel_stats.pluck(:video_count).max.to_f / 10).ceil * 10 + 5  %>
 <%= #line_chart @stats.map { |stat| {name: stat.title, data: stat.group_by_day(:created_at).maximum("video_count") }} 
 %>
 <h4>Views <small>조회수 통계</small></h4>
-<%= line_chart @channel_stats.group_by_day(:created_at).maximum("view_count") %>
+<%= line_chart @channel_stats.group_by_day(:created_at).maximum("view_count"), min: (@channel_stats.pluck(:view_count).min.to_f / 10).round * 10, max: (@channel_stats.pluck(:view_count).max.to_f / 10).ceil * 10 %>
 <h4><small>평균 조회수 통계(Views per video)</small></h4>
-<%= line_chart @channel_stats.group_by_day(:created_at).maximum("view_count / video_count") %>
+<%= line_chart @channel_stats.group_by_day(:created_at).maximum("view_count / video_count"), min: (@channel_stats.pluck("view_count / video_count").min.to_f / 10).round * 10, max: (@channel_stats.pluck("view_count / video_count").max.to_f / 10).ceil * 10 %>
 <h4>Subscriber <small>구독자 통계</small></h4>
-<%= line_chart @channel_stats.group_by_day(:created_at).maximum("subscriber_count") %>
+<%= line_chart @channel_stats.group_by_day(:created_at).maximum("subscriber_count"), min: (@channel_stats.pluck(:subscriber_count).min.to_f / 10).round * 10, max: (@channel_stats.pluck(:subscriber_count).max.to_f / 10).ceil * 10 %>
 <h4><small>구독 유치 통계(Subscribers per video)</small></h4>
-<%= line_chart @channel_stats.group_by_day(:created_at).maximum("subscriber_count / video_count") %>
+<%= line_chart @channel_stats.group_by_day(:created_at).maximum("subscriber_count / video_count"), min: (@channel_stats.pluck("subscriber_count / video_count").min.to_f / 10).round * 10, max: (@channel_stats.pluck("subscriber_count / video_count").max.to_f / 10).ceil * 10 %>
 
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
