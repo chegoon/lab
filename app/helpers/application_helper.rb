@@ -21,4 +21,11 @@ module ApplicationHelper
     	direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"
     	link_to title, {:sort => column, :direction => direction}, {:class => css_class}
 	end
+
+	def truncate(text, len, tail = '..')
+		if text.present?
+			unpacked = text.unpack('U*') 
+			unpacked.length > len ? unpacked[0..len-1].pack('U*') + tail : text
+		end
+	end	
 end

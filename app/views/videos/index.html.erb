@@ -3,6 +3,28 @@
 <div class="page-header">
   <h2>Videos Dashboard <small><%= number_with_delimiter(@videos.count) %> videos</small></h2>
 </div>
+<h4>Today's Videos | <%= @videos.where('published_at >= ?', Date.today).count %> Videos<small> <%= Date.today %></small></h4>
+  <div class="row">
+    <% @videos.where('published_at >= ?', Date.today).each_with_index do |v, i| %>
+
+    <div class="col-sm-12 col-md-6">
+      <div class="media thumbnail">
+          <div class="media-left pull-left">
+            <a href="<%= video_path(v) %>">
+              <%= image_tag(v.thumbnail_url, :class => "media-object") %>
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading"><%= truncate(v.title, 30) %></h4>
+            <h6><%= image_tag v.channel.thumbnail_url, :style => "height:40px; width:auto;" %> By <%= v.channel.title %></h6>
+            <p><%= truncate(v.description, 50) %></p>
+            <!--<div class="pull-right"><%= "Uploaded at #{v.published_at.getlocal.strftime("%F %R")}" if v.published_at %></div>-->
+          </div>
+        </div>
+    </div>
+    <% end %>
+
+  </div>
 
 <table class="table table-striped">
   <thead>
