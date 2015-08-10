@@ -42,11 +42,11 @@
 <div class="row">
   <div class="col-md-4">
     <h5><%= @video.title %></h5>
-    <%= pie_chart [ ["Likes", @video_stats.pluck(:like_count).reduce(:+)], ["Dislikes", @video_stats.pluck(:dislike_count).reduce(:+)] ], height: "200px" %>
+    <%= pie_chart [ ["Likes", @video_stats.pluck(:like_count).compact.reduce(:+)], ["Dislikes", @video_stats.pluck(:dislike_count).compact.reduce(:+)] ], height: "200px" %>
   </div>
   <div class="col-md-4">
     <h5><%= @video.channel.title %> 평균</h5>
-    <%= pie_chart [ ["Likes", @video.channel.videos.pluck(:like_count).reduce(:+)], ["Dislikes", @video.channel.videos.pluck(:dislike_count).reduce(:+)] ], height: "200px" %>
+    <%= pie_chart [ ["Likes", @video.channel.videos.pluck(:like_count).compact.reduce(:+)], ["Dislikes", @video.channel.videos.pluck(:dislike_count).compact.reduce(:+)] ], height: "200px" %>
   </div>
   <div class="col-md-4">
     <h5><%= @video.channel.regions.first.name %> 평균</h5>
