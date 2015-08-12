@@ -55,8 +55,6 @@
 </div>
 <h5>누적</h5>
 <%= line_chart [ {name: "Likes", data: @video_stats.group_by_day(:created_at).maximum("like_count")}, {name: "Dislikes", data: @video_stats.group_by_day(:created_at).maximum("dislike_count")} ] %>
-<%= @video.channel.regions.first.channels.pluck(:video_count).reduce(:+) %>
-<%= @video_stats.first.created_at %>
 <!--
 <h4>Favorites <small>Fab. 통계</small></h4>
 <%= line_chart @video_stats.group_by_day(:created_at).maximum("favorite_count") %>

@@ -8,7 +8,7 @@
     <% @videos.where('published_at >= ?', Date.today).each_with_index do |v, i| %>
 
     <div class="col-sm-12 col-md-6">
-      <div class="media thumbnail">
+      <div class="media thumbnail" style="min-height:140px;">
           <div class="media-left pull-left">
             <a href="<%= video_path(v) %>">
               <%= image_tag(v.thumbnail_url, :class => "media-object") %>
