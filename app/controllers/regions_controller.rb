@@ -4,7 +4,7 @@ class RegionsController < ApplicationController
   helper_method :sort_column, :sort_direction
   def index
     @regions = Region.all
-   
+
     #@regions = Region.order(sort_column + ' ' + sort_direction)
     #respond_with(@regions)
     #RegionsWorker.perform_async
@@ -25,7 +25,7 @@ class RegionsController < ApplicationController
 
   def create
     @region = Region.new(region_params)
-    @region.save
+    #@region.save
     #respond_with(@region)
 
     respond_to do |format|

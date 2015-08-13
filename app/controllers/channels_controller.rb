@@ -125,7 +125,7 @@ class ChannelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def channel_params
-      params.require(:channel).permit(:ch_id, :username, :title, :description, :published_at, :thumbnail_url, :video_count, :view_count, :subscriber_count, :comment_count, :joined, { region_ids: [] })
+      params.require(:channel).permit(:ch_id, :username, :title, :description, :published_at, :thumbnail_url, :video_count, :view_count, :subscriber_count, :comment_count, :joined, { region_ids: [] }, { team_ids: [] })
     end
     def sort_direction
       %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"

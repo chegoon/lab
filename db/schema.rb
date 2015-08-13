@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806143219) do
+ActiveRecord::Schema.define(version: 20150813162616) do
 
   create_table "channel_statistics", force: true do |t|
     t.integer  "channel_id"
@@ -42,11 +42,18 @@ ActiveRecord::Schema.define(version: 20150806143219) do
     t.string   "username"
   end
 
+  create_table "joins", force: true do |t|
+    t.integer  "team_id"
+    t.integer  "channel_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "playlist_items", force: true do |t|
     t.integer  "playlist_id"
     t.integer  "video_id"
     t.string   "it_id"
-    t.string   "title",         limit: 250
+    t.string   "title"
     t.text     "description"
     t.datetime "published_at"
     t.string   "thumbnail_url"
@@ -60,11 +67,11 @@ ActiveRecord::Schema.define(version: 20150806143219) do
 
   create_table "playlists", force: true do |t|
     t.integer  "pl_id"
-    t.string   "title",         limit: 250
+    t.string   "title"
     t.text     "description"
     t.string   "thumbnail_url"
     t.datetime "published_at"
-    t.text     "tags",          limit: 16777215
+    t.text     "tags"
     t.integer  "channel_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -105,8 +112,15 @@ ActiveRecord::Schema.define(version: 20150806143219) do
     t.integer  "comment_count"
   end
 
+  create_table "teams", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
-    t.string   "email",                  limit: 191, default: ""
+    t.string   "email",                  limit: 191, default: "", null: false
     t.string   "encrypted_password",     limit: 191, default: "", null: false
     t.string   "reset_password_token",   limit: 191
     t.datetime "reset_password_sent_at"
@@ -155,7 +169,7 @@ ActiveRecord::Schema.define(version: 20150806143219) do
 
   create_table "videos", force: true do |t|
     t.string   "v_id"
-    t.string   "title",          limit: 250
+    t.string   "title"
     t.text     "description"
     t.datetime "published_at"
     t.string   "thumbnail_url"
