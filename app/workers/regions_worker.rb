@@ -6,7 +6,7 @@ class RegionsWorker
 	def perform(region_id = 0)
 		puts "region worker is performing"
 		
-		region = region.find(region_id) if region_id != 0
+		region = Region.find(region_id) if region_id != 0
 		# if parameter channel is username
 		if (region_id != 0) && region
 			

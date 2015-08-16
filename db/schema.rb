@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150813162616) do
+ActiveRecord::Schema.define(version: 20150816125522) do
 
   create_table "channel_statistics", force: true do |t|
     t.integer  "channel_id"
@@ -112,11 +112,29 @@ ActiveRecord::Schema.define(version: 20150813162616) do
     t.integer  "comment_count"
   end
 
+  create_table "team_statistics", force: true do |t|
+    t.integer  "team_id"
+    t.integer  "channel_count"
+    t.integer  "view_count"
+    t.integer  "video_count"
+    t.integer  "subscriber_count"
+    t.integer  "comment_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "team_statistics", ["team_id"], name: "index_team_statistics_on_team_id", using: :btree
+
   create_table "teams", force: true do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "channel_count"
+    t.integer  "view_count"
+    t.integer  "video_count"
+    t.integer  "subscriber_count"
+    t.integer  "comment_count"
   end
 
   create_table "users", force: true do |t|
