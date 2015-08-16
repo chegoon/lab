@@ -22,6 +22,7 @@
   <ul class="nav nav-pills">
     <li role="presentation" <%= "class=active" if current_page?(root_url) %>><a href="/">Home</a></li>
     <li role="presentation" <%= "class=active" if current_page?('/regions') %>><a href="/regions">Region</a></li>
+    <li role="presentation" <%= "class=active" if current_page?('/teams') %>><a href="/teams">Team</a></li>
     <li role="presentation" <%= "class=active" if current_page?('/channels') %>><a href="/channels">Channel</a></li>
     <li role="presentation" <%= "class=active" if current_page?('/videos') %>><a href="/videos">Video</a></li>
   </ul>
