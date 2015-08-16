@@ -5,6 +5,7 @@
       <th style="text-align:right; padding-right:10px; ">Channels</th>
       <th style="text-align:right; padding-right:10px; ">Videos</th>
       <th style="text-align:right; padding-right:10px; ">Subscribers</th>
+      <th style="text-align:right; padding-right:10px; ">Views</th>
     </tr>
   </thead>
 
@@ -33,6 +34,15 @@
             
           <% end %>
           <%= number_with_delimiter(total_subscribers) %><%= num_diff(region.subscriber_count, delta.subscriber_count) if delta %>
+        </td>
+        <td style="text-align:right; padding-right:10px; ">
+          <% total_views = 0 %>
+          <% region.channels.each do |ch| %>
+
+            <% total_views = total_views + ch.view_count if ch.view_count.present? %>
+            
+          <% end %>
+          <%= number_with_delimiter(total_views) %><%= num_diff(region.view_count, delta.view_count) if delta %>
         </td>
       </tr>
     <% end %>
