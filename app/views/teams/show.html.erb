@@ -1,14 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @team.name %>
-</p>
+<h1><%= @team.name %> <small></small></h1>
 
-<p>
-  <strong>Description:</strong>
-  <%= @team.description %>
-</p>
+<h3>Stats <small>Top 10 Team 통계</small></h3>
+
+<h4>Subscribers <small>구독자 통계</small></h4>
+<%= pie_chart @team.channels.order("subscriber_count DESC").group(:title).maximum("subscriber_count").first(10) %>
+<h4>Videos <small>비디오 조회 통계</small></h4>
+<%= pie_chart @team.channels.order("view_count DESC").group(:title).maximum("view_count").first(10) %>
+
+<%= render partial: 'channels/channels'  %>
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>

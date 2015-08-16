@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
   
+  helper_method :sort_column, :sort_direction
 
   def index
     @teams = Team.all
@@ -9,6 +10,7 @@ class TeamsController < ApplicationController
 
   def show
     #respond_with(@team)
+    @channels = @team.channels.order(sort_column + ' ' + sort_direction).page(params[:page])
   end
 
   def new
@@ -52,5 +54,12 @@ class TeamsController < ApplicationController
 
     def team_params
       params.require(:team).permit(:name, :description)
+    end
+
+  def sort_direction
+      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
+    end
+    def sort_column
+      Channel.column_names.include?(params[:sort]) ? params[:sort] : "subscriber_count"
     end
 end

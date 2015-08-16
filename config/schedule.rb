@@ -34,3 +34,8 @@ every 24.hours do
 	puts "RegionsWorker.perform_async is called"
 	runner "RegionsWorker.perform_async"
 end
+
+every 24.hours do
+	puts "TeamsWorker.perform_async is called"
+	runner "TeamsWorker.perform_async"
+end
