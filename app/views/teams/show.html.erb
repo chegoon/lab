@@ -9,6 +9,12 @@
 <h4>Videos <small>비디오 조회 통계</small></h4>
 <%= pie_chart @team.channels.order("view_count DESC").group(:title).maximum("view_count").first(10) %>
 
+<h4>Monthly Statics<small>월별 통계</small></h4>
+<h5>구독자</h5>
+<%= line_chart @team.team_statistics.group_by_month(:created_at).maximum("subscriber_count"), min: (@team.team_statistics.pluck(:subscriber_count).min.to_f / 10).round * 10 - 5, max: (@team.team_statistics.pluck(:subscriber_count).max.to_f / 10).ceil * 10 + 5  %>
+<h5>조회</h5>
+<%= line_chart @team.team_statistics.group_by_month(:created_at).maximum("view_count"), min: (@team.team_statistics.pluck(:view_count).min.to_f / 10).round * 10 - 5, max: (@team.team_statistics.pluck(:view_count).max.to_f / 10).ceil * 10 + 5  %>
+
 <%= render partial: 'channels/channels'  %>
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
